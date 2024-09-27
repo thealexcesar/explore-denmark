@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 
 @Component({
   selector: 'denmark-root',
