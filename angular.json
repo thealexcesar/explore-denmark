@@ -32,7 +32,7 @@
               }
             ],
             "styles": [
-              "src/styles.sass"
+              "src/assets/stylesheets/styles.sass"
             ],
             "scripts": []
           },
@@ -91,12 +91,26 @@
               }
             ],
             "styles": [
-              "src/styles.sass"
+              "src/app/assets/stylesheets/styles.sass"
             ],
             "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
     }
+  },
+  "cli": {
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

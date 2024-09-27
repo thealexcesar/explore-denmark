@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@200,900&display=swap')
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap')
+
+@tailwind base
+@tailwind components
+@tailwind utilities
+
+/* Table of Contents
+  ----------------------------------------------------------------------
+  1. Global Styles
+  2. Header Styles
+  3. Main Styles
+  4. Footer Styles
+  5. Variables
+  6. Mixins
+  7. Base Styles
+  8. Link Styles
+  9. Button Styles
+  10. Icon Styles
+  11. Image Styles
+  12. Menu Content Styles
+  13. Theme Styles
+  ---------------------------------------------------------------------- */
+
+::-webkit-scrollbar
+  width: 7px
+::-webkit-scrollbar-track
+  background: #2D3748
+::-webkit-scrollbar-thumb
+  background: #CBD5E0
+::-webkit-scrollbar-thumb:hover
+  background: #718096
+
+/* 5. Variables
+  ---------------------------------------------------------------------- */
+$blue-primary: #004b87
+$red-primary: #c8102e
+$white-secondary: #ffffff
+$grey-secondary: #b0b3b8
+$bg-light: #f0f4f8
+$bg-dark: #1a1a1a
+$link: #4493f8
+
+$text-light: $bg-dark
+$text-dark: $white-secondary
+$border-light: $blue-primary
+$border-dark: $red-primary
+
+$font-sizes: h1 2.5rem, h2 2rem, h3 1.75rem, h4 1.5rem
+
+/* Font Size Mixin */
+@each $element, $size in $font-sizes
+  #{$element}
+    font-size: $size
+
+/* 6. Mixins
+  ---------------------------------------------------------------------- */
+@mixin transition($time: 500ms, $props: all, $timing-function: ease-in-out)
+  -webkit-transition: $props $time $timing-function
+  -moz-transition: $props $time $timing-function
+  -o-transition: $props $time $timing-function
+  transition: $props $time $timing-function
+
+@mixin theme-styles($text-color, $border-color, $bg-primary, $bg-secondary)
+  $darken: adjust-color($bg-primary, $lightness: -50%)
+
+  body
+    color: $text-color
+    background: $bg-primary
+    @include transition(0.2s, color)
+
+  header
+    color: $text-color
+    border-bottom: 1px solid $bg-primary
+    box-shadow: 0 1px 6px $darken
+    background-color: $bg-secondary
+
+  a
+    color: $text-color
+
+    &:hover
+      color: $link
+
+  button
+    color: $bg-primary
+    background-color: $border-color
+    border: 1px solid $border-color
+    box-shadow: 1px 1px 4px darken($border-color, 90%)
+    padding: 10px 20px
+    border-radius: 5px
+    @include transition()
+
+    &:hover
+      background-color: lighten($border-color, 10%)
+
+    &:active
+      background-color: darken($border-color, 60%)
+      box-shadow: 1px 1px 4px lighten($border-color, 10%)
+
+    & > a
+      color: inherit
+
+      &:hover
+        color: $bg-primary
+        background-color: darken($bg-primary, 10%)
+
+/* 7. Base Styles
+  ---------------------------------------------------------------------- */
+body
+  @apply antialiased
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+/* 8. Link Styles
+  ---------------------------------------------------------------------- */
+a
+  text-decoration: none
+  padding: 0.5rem 1rem
+  border-radius: 0.25rem
+
+  &:hover
+    text-decoration: underline
+    transform: scale(1.1)
+    @include transition(400ms)
+
+/* 9. Button Styles
+  ---------------------------------------------------------------------- */
+button
+  font-size: 0.9rem
+  padding: 6px
+  border-radius: 12px
+
+/* 10. Icon Styles
+  ---------------------------------------------------------------------- */
+fa-icon
+  cursor: pointer
+
+/* 11. Image Styles
+  ---------------------------------------------------------------------- */
+img
+  cursor: pointer
+  object-fit: contain
+  width: 100%
+  height: 100%
+
+/* 12. Menu Content Styles
+  ---------------------------------------------------------------------- */
+mat-mdc-menu-content
+  border: 1px solid red
+  margin-top: 100px
+
+/* 13. Theme Styles
+  ---------------------------------------------------------------------- */
+[data-theme="dark"]
+  $bg-primary: $bg-dark
+  $bg-secondary: $blue-primary
+  $border-color: $border-dark
+  $text-color: $text-dark
+  @include theme-styles($text-color, $border-color, $bg-primary, $bg-secondary)
+
+[data-theme="light"]
+  $bg-primary: $bg-light
+  $bg-secondary: $grey-secondary
+  $border-color: $border-light
+  $text-color: $text-light
+  @include theme-styles($text-color, $border-color, $bg-primary, $bg-secondary)

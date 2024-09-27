@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 
 @Component({
-  selector: 'app-root',
+  selector: 'denmark-root',
   standalone: true,
   imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.sass'
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   title = 'explore-denmark';
