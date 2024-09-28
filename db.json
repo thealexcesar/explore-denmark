@@ -1,0 +1,55 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Music",
+      "articleIds": [1, 2],
+      "sectionId": 1
+    },
+    {
+      "id": 2,
+      "name": "Art",
+      "articleIds": [3],
+      "sectionId": 1
+    }
+  ],
+  "articles": [
+    {
+      "id": 1,
+      "title": "Danish Music",
+      "content": "A rich history of folk music in Denmark...",
+      "published": false,
+      "categoryId": 1
+    },
+    {
+      "id": 2,
+      "title": "Classical Composers",
+      "content": "Exploring the works of Danish composers...",
+      "published": true,
+      "categoryId": 1
+    },
+    {
+      "id": 3,
+      "title": "Danish Modern Art",
+      "content": "An overview of modern art in Denmark...",
+      "published": true,
+      "categoryId": 2
+    }
+  ],
+  "sections": [
+    {
+      "id": 1,
+      "name": "Culture"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "first_name": "Admin",
+      "last_name": "User",
+      "email": "admin@gmail.com",
+      "password": "admin123",
+      "roles": "admin"
+    }
+  ]
+}
