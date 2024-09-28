@@ -7,17 +7,20 @@
 /*
   Table of Contents
   ----------------------------------------------------------------------
-  1. Global Styles
-  2. Variables
-  3. Mixins
-  4. Base Styles
-  5. Link Styles
-  6. Button Styles
-  7. Icon Styles
-  8. Image Styles
+  01. Global Styles
+  02. Variables
+  03. Mixins
+  04. Base Styles
+  05. Link Styles
+  06. Button Styles
+  07. Icon Styles
+  08. Image Styles
+  09. Header
+  10. Main
+  11. Footer
   ---------------------------------------------------------------------- */
 
-/* 1. Global Styles
+/* 01. Global Styles
   ---------------------------------------------------------------------- */
 ::-webkit-scrollbar
   width: 7px
@@ -31,22 +34,18 @@
 ::-webkit-scrollbar-thumb:hover
   background: #718096
 
-/* 2. Variables
+/* 02. Variables
   ---------------------------------------------------------------------- */
 $dark: #1a1a1a
 $light: #f0f4f8
 $link: #4493f8
 
-.bg-secondary
-  background-color: $light
-
 $font-sizes: h1 2.5rem, h2 2rem, h3 1.75rem, h4 1.5rem
-
 @each $element, $size in $font-sizes
   #{$element}
     font-size: $size
 
-/* 3. Mixins
+/* 03. Mixins
   ---------------------------------------------------------------------- */
 @mixin transition($time: 500ms, $props: all, $timing-function: ease-in-out)
   -webkit-transition: $props $time $timing-function
@@ -54,28 +53,25 @@ $font-sizes: h1 2.5rem, h2 2rem, h3 1.75rem, h4 1.5rem
   -o-transition: $props $time $timing-function
   transition: $props $time $timing-function
 
-/* 4. Base Styles
+/* 04. Base Styles
   ---------------------------------------------------------------------- */
-body
-  @apply antialiased
+*
   margin: 0
   padding: 0
   box-sizing: border-box
+
+html, body
+  @apply antialiased
+  height: 100vh
   color: $dark
   background: $light
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+  font-family: Arial, sans-serif
   @include transition(0.2s, color)
 
-header
-  position: fixed
-  top: 0
-  width: 100vw
-  height: 10vh
-  min-height: 40px
-  max-height: 50px
-  color: $dark
-  background-color: lighten($light, 10)
-
-/* 5. Link Styles
+/* 05. Link Styles
   ---------------------------------------------------------------------- */
 a
   text-decoration: none
@@ -89,20 +85,91 @@ a
     transform: scale(1.1)
     @include transition(400ms)
 
-/* 6. Button Styles
+/* 06. Button Styles
   ---------------------------------------------------------------------- */
 button
   @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full
 
-/* 7. Icon Styles
+/* 07. Icon Styles
   ---------------------------------------------------------------------- */
 fa-icon
   cursor: pointer
 
-/* 8. Image Styles
+/* 08. Image Styles
   ---------------------------------------------------------------------- */
 img
   cursor: pointer
   object-fit: contain
   width: 100%
   height: 100%
+
+/* 09. Header
+  ---------------------------------------------------------------------- */
+#header
+  position: fixed
+  top: 0
+  left: 0
+  width: 100vw
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  color: $dark
+  text-align: center
+  vertical-align: middle
+  background-color: $light
+  @include transition()
+
+  & > div
+    padding: 16px 0
+    z-index: 20
+
+  &::before
+    content: ''
+    position: absolute
+    top: -100%
+    left: 0
+    width: 100%
+    height: 100%
+    background-color: lighten($light, 20%)
+    z-index: 10
+    @include transition()
+
+  &.scrolled::before
+    transform: translateY(100%)
+    transition: border-bottom 0.2s ease-out, background-color 0.9s ease
+
+  &.scrolled
+    @apply border-b-2 border-denmark-red bg-denmark-red shadow-md
+
+/* 10. Main
+  ---------------------------------------------------------------------- */
+div[class^='main']
+  height: 80vh
+  min-height: 200px
+  margin: 6rem 0 1rem 0
+  .container
+    padding: 0
+
+/* 11. Footer
+  ---------------------------------------------------------------------- */
+#footer
+  margin-top: 6rem
+  position: relative
+  background-color: $light
+  vertical-align: middle
+  display: flex
+  align-items: center
+
+  .container
+    padding: 24px 0 24px 0
+
+  &::before
+    content: ''
+    position: absolute
+    bottom: 100%
+    left: 0
+    width: 100%
+    height: 1px
+    z-index: 1
+    @apply bg-denmark-red

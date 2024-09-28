@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {CommonModule, NgIf} from '@angular/common';
 import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {MatButton} from "@angular/material/button";
@@ -24,6 +24,7 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
+  isScrolled: boolean = false;
 
   constructor(
     private router: Router,
@@ -31,6 +32,16 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn().then();
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const header = document.getElementById('header');
+    if (window.scrollY > 0) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
   }
 
   async isLoggedIn() {

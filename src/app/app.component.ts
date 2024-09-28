@@ -1,24 +1,27 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {HeaderComponent} from "@ui/header/header.component";
 import {FaIconLibrary} from "@fortawesome/angular-fontawesome";
 import {fas} from "@fortawesome/free-solid-svg-icons";
 import {HomeComponent} from "@pages/home/home.component";
 import {CommonModule} from "@angular/common";
+import {LoginComponent} from "@login/login.component";
+import {FooterComponent} from "@ui/footer/footer.component";
 
 @Component({
   selector: 'denmark-root',
   standalone: true,
   imports: [
-    RouterOutlet,
+    FooterComponent,
     HeaderComponent,
     HomeComponent,
-    CommonModule
+    LoginComponent,
+
+    CommonModule,
+
+    RouterOutlet
   ],
-  template: `
-    <denmark-header/>
-    <router-outlet/>
-  `
+  template: `<denmark-header id="header"/> <router-outlet/> <denmark-footer id="footer"/>`
 })
 export class AppComponent {
   title = 'explore-denmark';
