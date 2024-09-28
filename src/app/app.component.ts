@@ -21,7 +21,7 @@ import {FooterComponent} from "@ui/footer/footer.component";
 
     RouterOutlet
   ],
-  template: `<denmark-header id="header"/> <router-outlet/> <denmark-footer id="footer"/>`
+  template: `<denmark-header id="header"/> <router-outlet/> <denmark-footer id="footer" class="mt-10"/>`
 })
 export class AppComponent {
   title = 'explore-denmark';
