@@ -1,0 +1,25 @@
+<header class="flex justify-between items-center shadow-md border-b-2 border-denmark-red">
+  <div class="container flex justify-between items-center">
+    <div id="internal-links" class="flex space-x-2">
+    </div>
+
+   <!-- <div id="path-links" class="flex">
+      <ng-container *ngFor="let link of externalLinks">
+        <button mat-button [routerLink]="link.path" routerLinkActive="active-link">
+          {{ ('sections.'+link.label) | translate }}
+        </button>
+      </ng-container>
+    </div-->
+    >
+    <div id="set-app"  class="flex space-x-2">
+
+    </div>
+  </div>
+
+  <div class="flex space-x-2">
+    <button *ngIf="isLoggedIn()" class="btn btn-danger" (click)="logout()">
+      Logout
+    </button>
+  </div>
+
+</header>
