@@ -1,60 +1,82 @@
-import { Injectable } from '@angular/core';
-import {BehaviorSubject, map, Observable} from "rxjs";
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {User} from "@models/user-model";
-import {environment} from "@environments/environment";
+import {Injectable, Injector} from '@angular/core';
+import {BehaviorSubject, catchError, Observable, tap, throwError} from "rxjs";
+import {defaultAuthStatus} from "@models/auth/default-auth-status";
+import {UserModel} from "@models/user/user-model";
+import {CommonErrors} from "../common/common-errors";
+import {HttpClient} from "@angular/common/http";
+import {AuthStatus} from "@models/auth/auth-status";
+import {ServerAuthResponse} from "@models/auth/server-auth-status";
+import {User} from "@models/user/user";
+
+interface UserParams {
+  email: string,
+  password: string,
+  name?: { first: string; last?: string }
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = `${environment.apiUrl}/users`;
-  private currentUserSubject: BehaviorSubject<User | null>;
-  public currentUser: Observable<User | null>;
+  private readonly tokenKey = 'token';
+  private readonly authStatus = new BehaviorSubject<AuthStatus>(defaultAuthStatus);
+  private readonly currentUser = new BehaviorSubject<UserModel>(new UserModel());
+  private readonly url = 'https://api.escuelajs.co/api/v1';
 
-  constructor(private http: HttpClient) {
-    const storedUser = localStorage.getItem('currentUser');
-    const loggedInUser = storedUser ? JSON.parse(storedUser) : null;
-    this.currentUserSubject = new BehaviorSubject<User | null>(loggedInUser);
-    this.currentUser = this.currentUserSubject.asObservable();
+  constructor(private httpClient: HttpClient, private injector: Injector) {
+    const token = this.getToken();
+    if (token) {
+      this.setToken(token);
+    }
   }
 
-  public get currentUserValue(): User | null {
-    return this.currentUserSubject.value;
+  get common() {
+    return this.injector.get(CommonErrors);
   }
 
-  login(login: { email: string; password: string }): Observable<User | null> {
-    const loginParams = new HttpParams()
-      .set('email', login.email)
-      .set('password', login.password);
+  authenticate(action: 'login' | 'register', params: UserParams): Observable<ServerAuthResponse> {
+    const endpoint = this.getEndpoint(action);
+    const body = this.createRequestBody(action, params);
 
-    return this.http.get<User[]>(this.apiUrl, { params: loginParams }).pipe(
-      map(users => {
-        if (users.length === 0) {
-          return null;
-        }
-        const user = users[0];
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
-        return user;
-      })
+    console.log('Request Body:', body);
+
+    return this.httpClient.post<ServerAuthResponse>(endpoint, body).pipe(
+      tap((res) => this.handleAuthResponse(res, action, body)),
+      catchError((error) => this.common.handleError(error))
     );
   }
 
-  logout(): void {
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
+  logout(clearToken: boolean = true): void {
+    if (clearToken) {
+      localStorage.removeItem(this.tokenKey);
+    }
+    this.authStatus.next(defaultAuthStatus);
+    this.currentUser.next(new UserModel());
   }
 
-  getCurrentUser(): Observable<User | null> {
-    return this.currentUser;
+  private getToken(): string | null {
+    return localStorage.getItem(this.tokenKey);
   }
 
-  saveUser(user: User): Observable<User> {
-    return this.http.post<User>(this.apiUrl, user).pipe(
-      map(newUser => {
-        return newUser;
-      })
-    );
+  private setToken(token: string): void {
+    localStorage.setItem(this.tokenKey, token);
+  }
+
+  private createRequestBody(action: 'login' | 'register', params: UserParams): any {
+    const baseBody = { email: params.email, password: params.password };
+    return action === 'register' ? { ...baseBody, name: params.name } : baseBody;
+  }
+
+  private getEndpoint(action: 'login' | 'register'): string {
+    return action === 'login' ? `${this.url}/auth/login` : `${this.url}/users/is-available`;
+  }
+
+  private handleAuthResponse(res: ServerAuthResponse, action: 'login' | 'register', body: UserParams): void {
+    this.setToken(res.accessToken);
+
+    if (action === 'register') {
+      const newUser = UserModel.build(body as User);
+      console.log('Registered User Data:', newUser);
+    }
   }
 }

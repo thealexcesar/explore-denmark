@@ -7,6 +7,7 @@ import {HomeComponent} from "@pages/home/home.component";
 import {CommonModule} from "@angular/common";
 import {LoginComponent} from "@login/login.component";
 import {FooterComponent} from "@ui/footer/footer.component";
+import {MaterialModules} from "./shared/modules/material-modules";
 
 @Component({
   selector: 'denmark-root',
@@ -17,6 +18,7 @@ import {FooterComponent} from "@ui/footer/footer.component";
     HomeComponent,
     LoginComponent,
 
+    MaterialModules,
     CommonModule,
 
     RouterOutlet

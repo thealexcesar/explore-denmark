@@ -27,6 +27,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "jwt-decode": "^4.0.0",
     "rxjs": "^7.8.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
@@ -41,6 +42,7 @@
     "@angular/cli": "^18.2.5",
     "@angular/compiler-cli": "^18.2.0",
     "@types/jasmine": "~5.1.0",
+    "@types/jwt-decode": "^2.2.1",
     "@typescript-eslint/eslint-plugin": "7.11.0",
     "@typescript-eslint/parser": "7.11.0",
     "autoprefixer": "^10.4.20",
