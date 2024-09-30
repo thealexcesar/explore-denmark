@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
+import {NavLinksComponent} from "@ui/nav-links/nav-links.component";
+import {RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'denmark-history',
   standalone: true,
-  imports: [],
+  imports: [
+    NavLinksComponent,
+    RouterOutlet
+  ],
   templateUrl: './history.component.html',
-  styleUrl: './history.component.sass'
+  styles: ``
 })
 export class HistoryComponent {
 

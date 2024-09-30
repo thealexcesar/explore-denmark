@@ -1,0 +1,11 @@
+<nav>
+  <ul [ngClass]="{'hidden': !menuOpen, 'block': menuOpen, 'md:flex': true}" class="flex-col md:flex-row md:flex md:space-x-6 items-center">
+    <li><a [routerLink]="['demography']">Demography</a></li>
+    <li><a [routerLink]="['history']">History</a></li>
+    <li><a [routerLink]="['economy']">Economy</a></li>
+    <li><a [routerLink]="['/articles']">Articles</a></li>
+
+    <button *ngIf="isLoggedIn" class="btn btn-danger" (click)="logout()">Logout</button>
+    <button *ngIf="!isLoggedIn" class="btn btn-primary" [routerLink]="['/login']">Login</button>
+  </ul>
+</nav>

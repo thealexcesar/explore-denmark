@@ -69,6 +69,8 @@ html, body
   font-family: Arial, sans-serif
   @include transition(0.2s, color)
 
+  ul
+    list-style: none
 /* 05. Link Styles
   ---------------------------------------------------------------------- */
 a
@@ -176,30 +178,34 @@ img
 
 /* 11. Footer
   ---------------------------------------------------------------------- */
+.content-wrapper
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+  padding-left: 1rem
+  padding-right: 1rem
+
 .content
+  container: true
+  margin-left: auto
+  margin-right: auto
+  padding: 1.5rem
+  flex: 1
 
-  &.home
-    background-image: url('assets/images/viking.png')
-  &.history
-    background-image: url('assets/images/history.png')
-  &.demographics
-    background-image: url('assets/images/demographics.png')
-  &.economy, &.geography
-    background-image: url('assets/images/flag.png')
+h1, p
+  font-size: 0.875rem
+  @media (min-width: 768px)
+    font-size: 1rem
 
-  background-size: cover
-  background-position: center
-  min-height: 80vh
+#footer
+  display: flex
+  align-items: center
+  justify-content: center
+  padding: 1rem
 
-  h1, p
-    position: relative
-    z-index: 2
+  .container
+    color: white
+    text-align: center
 
-  .overlay
-    position: absolute
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
-    background-color: #f0f4f8f3
-    z-index: 1
+.overlay
+  background-color: rgba(240, 244, 248, 0.95)

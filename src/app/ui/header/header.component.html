@@ -1,13 +1,12 @@
 <div class="container">
   <div class="flex justify-between items-center space-x-2">
-    <fa-icon [icon]="['fas', 'home']" [routerLink]="['/home']"></fa-icon>
+    <fa-icon [icon]="['fas', 'home']" [routerLink]="['']"/>
 
-    <button *ngIf="isLoggedIn" class="btn btn-danger" (click)="logout()">
-      <span class="user-email">{{ currentUser }} logout </span>
-    </button>
-
-    <button *ngIf="!isLoggedIn" class="btn btn-primary" [routerLink]="['/login']">
-      <span class="user-email">{{ currentUser }} Login</span>
-    </button>
+    <div class="block md:hidden">
+      <button (click)="toggleMenu()" class="text-denmark-red focus:outline-none">
+        <fa-icon [icon]="['fas', 'bars']"></fa-icon>
+      </button>
+    </div>
+    <denmark-nav-links/>
   </div>
 </div>
