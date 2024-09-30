@@ -9,7 +9,7 @@ import {ServerAuthResponse} from "@models/auth/server-auth-status";
 import {MatIcon} from "@angular/material/icon";
 
 @Component({
-  selector: 'app-login',
+  selector: 'denmark-login',
   standalone: true,
   imports: [
     FormsModule,
@@ -25,6 +25,7 @@ export class LoginComponent {
   firstName: string = '';
   lastName: string = '';
   isSignIn: boolean = true;
+  title: string = 'Denmark';
 
   constructor(
     private auth: AuthService,

@@ -8,6 +8,7 @@ import {CommonModule} from "@angular/common";
 import {LoginComponent} from "@login/login.component";
 import {FooterComponent} from "@ui/footer/footer.component";
 import {MaterialModules} from "./shared/modules/material-modules";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'denmark-root',
@@ -20,10 +21,11 @@ import {MaterialModules} from "./shared/modules/material-modules";
 
     MaterialModules,
     CommonModule,
+    MatSnackBarModule,
 
     RouterOutlet
   ],
-  template: `<denmark-header id="header"/> <router-outlet/> <denmark-footer id="footer" class="mt-10"/>`
+  template: `<denmark-header id="header"/> <router-outlet/> <denmark-footer id="footer"/>`
 })
 export class AppComponent {
   title = 'explore-denmark';

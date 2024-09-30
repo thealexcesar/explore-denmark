@@ -1,64 +1,60 @@
-<main class="container flex justify-center items-center">
-  <div class="w-full p-8 bg-gray-100 shadow-lg rounded-md">
-    <h2 class="text-2xl font-bold mb-6 text-center">
-      {{ isSignIn ? 'Login' : 'Register' }}
-    </h2>
+<main class="content-wrapper">
+  <div class="content bg-gray-50 rounded-md shadow-md">
+    <div class="flex items-center justify-center">
+      <img src="./assets/images/viking.png" alt="Logo: Viking" class="w-12 h-12 border rounded-md border-gray-300">
+      <h2 class="text-gray-700 ml-4">{{ isSignIn ? 'Login' : 'Register' }}</h2>
+    </div>
 
-    <form (ngSubmit)="OnSubmit()" #authForm="ngForm">
-      <div class="mb-2" *ngIf="!isSignIn">
-        <mat-form-field appearance="outline" class="w-full rounded-md">
-          <mat-label>First Name</mat-label>
-          <input matInput [(ngModel)]="firstName" name="firstName" required />
-          <mat-icon matSuffix>person</mat-icon>
-          <mat-error *ngIf="authForm.submitted && !firstName">
-            First name is required.
-          </mat-error>
-        </mat-form-field>
+    <form (ngSubmit)="OnSubmit()" #authForm="ngForm" class="mt-4 custom-form">
+      <div class="mb-4" *ngIf="!isSignIn">
+        <input type="text" [(ngModel)]="firstName" name="firstName" required/>
+        <div *ngIf="authForm.submitted && !firstName" class="text-red-500 text-sm">First name is required.</div>
       </div>
 
-      <div class="mb-2" *ngIf="!isSignIn">
-        <mat-form-field appearance="outline" class="w-full rounded-md">
-          <mat-label>Last Name</mat-label>
-          <input matInput [(ngModel)]="lastName" name="lastName" />
-          <mat-icon matSuffix>person</mat-icon>
-        </mat-form-field>
+      <div class="mb-4" *ngIf="!isSignIn">
+        <input type="text" [(ngModel)]="lastName" name="lastName" placeholder="Last Name" aria-label="Last Name"/>
       </div>
 
-      <div class="mb-2">
-        <mat-form-field appearance="outline" class="w-full rounded-md">
-          <mat-label>Email</mat-label>
-          <input matInput type="email" [(ngModel)]="credentials.email" name="email" required />
-          <mat-icon matSuffix>email</mat-icon>
-          <mat-error *ngIf="authForm.submitted && !credentials.email">
-            Email is required.
-          </mat-error>
-        </mat-form-field>
+      <div class="mb-4">
+        <input type="email" [(ngModel)]="credentials.email" name="email" required/>
       </div>
 
-      <div class="mb-6">
-        <mat-form-field appearance="outline" class="w-full rounded-md">
-          <mat-label>Password</mat-label>
-          <input matInput type="password" [(ngModel)]="credentials.password" name="password" required />
-          <mat-icon matSuffix>lock</mat-icon>
-          <mat-error *ngIf="authForm.submitted && !credentials.password">
-            Password is required.
-          </mat-error>
-        </mat-form-field>
+      <div class="mb-4">
+        <input type="password" [(ngModel)]="credentials.password" name="password" required/>
       </div>
 
-      <div *ngIf="authForm.hasError('wrongCredentials')" class="text-red-500 mb-4">
-        Invalid credentials
+      <div class="flex items-center justify-between mb-4 w-full">
+        <div class="flex justify-start items-center p-0" style="width: 320px;">
+          <label for="remember" class="flex justify-start items-center w-1/2 p-0">
+            <input
+              id="remember"
+              type="checkbox"
+              name="remember"
+              class="border text-blue-600 rounded-md transition duration-200"
+            />
+            <span class="text-sm w-full ml-2">Lembre-me</span>
+          </label>
+        </div>
+
+        <span *ngIf="isSignIn" class="block text-sm text-blue-600 hover:underline">Esqueceu sua Senha?</span>
       </div>
 
-      <div class="flex justify-end">
-        <button mat-raised-button color="primary" type="submit" [disabled]="authForm.invalid">
-          {{ isSignIn ? 'Login' : 'Register' }}
+      <div *ngIf="authForm.hasError('wrongCredentials')" class="text-red-500 mb-4 text-center">
+        Credenciais inválidas.
+      </div>
+
+      <div class="mt-6 w-full text-right">
+        <button
+          type="submit"
+          class="text-sm"
+          [disabled]="authForm.invalid">
+          Salvar
         </button>
       </div>
 
-      <div class="flex justify-center mt-4">
+      <div class="flex justify-center mt-4 text-blue-600">
         <p class="text-sm cursor-pointer" (click)="toggleSignIn()">
-          {{ isSignIn ? 'Don\'t have an account? Register' : 'Already have an account? Login' }}
+          {{ isSignIn ? "Não tem Cadastro? Registere-se" : 'Já possui Conta? Faça Login' }}
         </p>
       </div>
     </form>

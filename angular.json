@@ -26,12 +26,15 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "sass",
             "assets": [
+              "src/assets",
+              "src/favicon.ico",
               {
                 "glob": "**/*",
                 "input": "public"
               }
             ],
             "styles": [
+              "src/custom-theme.scss",
               "src/assets/stylesheets/styles.sass"
             ],
             "scripts": []

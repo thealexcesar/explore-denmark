@@ -1,11 +1,13 @@
 <div class="container">
-
   <div class="flex justify-between items-center space-x-2">
-    <fa-icon [icon]="['fas', 'home']" [routerLink]="['/login']" />
-    <button *ngIf="isLoggedIn()" class="btn btn-danger" (click)="logout()">
-      Logout
+    <fa-icon [icon]="['fas', 'home']" [routerLink]="['/home']"></fa-icon>
+
+    <button *ngIf="isLoggedIn" class="btn btn-danger" (click)="logout()">
+      <span class="user-email">{{ currentUser }} logout </span>
+    </button>
+
+    <button *ngIf="!isLoggedIn" class="btn btn-primary" [routerLink]="['/login']">
+      <span class="user-email">{{ currentUser }} Login</span>
     </button>
   </div>
-
 </div>
-

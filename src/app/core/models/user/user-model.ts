@@ -15,7 +15,7 @@ export class UserModel implements User {
     public email: string = '',
     public dateOfBirth: Date | string | null = null,
     public isActive: boolean = false,
-    public name: Name = { first: '', last: '' },
+    public name: string = '',
     public password: string = '',
     public role: RoleType | string = RoleType.USER
   ) {}
@@ -32,17 +32,6 @@ export class UserModel implements User {
       user.password,
       user.role as RoleType
     );
-  }
-
-  toJSON(): object {
-    const serialized = Object.assign(this)
-    delete serialized.id
-    delete serialized.fullName
-    return serialized
-  }
-
-  get fullName(): string {
-    return this.name?.last ? `${this.name.first} ${this.name.last}` : this.name.first;
   }
 
   logout(clearToken?: boolean): void {

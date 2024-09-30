@@ -5,6 +5,8 @@ import {MatButton} from "@angular/material/button";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+import {AuthService} from "@services/auth.service";
+import {UserModel} from "@models/user/user-model";
 
 @Component({
   selector: 'denmark-header',
@@ -24,14 +26,19 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
+  isLoggedIn: boolean = false;
+  currentUser: UserModel | string = '';
   isScrolled: boolean = false;
 
   constructor(
     private router: Router,
+    private authService: AuthService
+
   ) {}
 
   ngOnInit(): void {
-    this.isLoggedIn().then();
+    this.isLoggedIn = this.authService.isLoggedIn();
+    this.currentUser = this.isLoggedIn ? this.authService.getCurrentUser() : '';
   }
 
   @HostListener('window:scroll', [])
@@ -44,11 +51,8 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  async isLoggedIn() {
-    // this.isLoggedInStatus = await this.authService.isLoggedIn();
-  }
-
   logout() {
-    // this.authService.logout().then();
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

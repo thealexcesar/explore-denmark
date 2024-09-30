@@ -1,13 +1,33 @@
-<div class="main-home">
-  <div class="container">
-    <h1 class="text-blue">
-      Explore a <span class="text-red">Dinamarca</span>
-    </h1>
-    <h3 class="">h3</h3>
-    <h4 class="text-blue">h4</h4>
-    <h5>H5</h5>
-    <h6>h6</h6>
-    <p>paragraph</p>
-    <button>Button</button>
+<div class="content-wrapper flex flex-col h-screen pt-20">
+  <div class="container mx-auto content-home relative flex-1 pt-10">
+    <div class="overlay"></div>
+    <h1 class="text-denmark-red mb-4">Dinamarca</h1>
+    <p class="mb-4">A Dinamarca, um dos países nórdicos, é rica em história e cultura, com raízes que remontam à Era Viking, aproximadamente entre os séculos VIII e XI. Durante esse período, os dinamarqueses se destacaram como habilidosos navegadores e guerreiros, explorando vastas regiões da Europa e além. Os vikings dinamarqueses eram conhecidos por suas incursões marítimas, estabelecendo assentamentos que se estendiam da atual Inglaterra à Rússia, e até mesmo na América do Norte, onde, segundo algumas fontes, chegaram a descobrir a Terra Nova, no Canadá, cerca de 500 anos antes de Cristóvão Colombo.</p>
+    <p class="mb-4">A Dinamarca unificou-se como um reino no século X sob o rei Harald Bluetooth, que também é famoso por introduzir o cristianismo na região. O legado viking é evidente não apenas na história militar da Dinamarca, mas também em sua língua, cultura e tradições que perduram até hoje. As sagas vikings, que narram as aventuras e conquistas desses povos, continuam a influenciar a literatura e a cultura popular, oferecendo um vislumbre fascinante da vida e da sociedade dinamarquesa na antiguidade.</p>
+    <p>A Dinamarca moderna, portanto, carrega consigo esse rico patrimônio histórico, refletindo uma evolução de um povo que começou como exploradores destemidos e se tornou uma nação reconhecida pela sua alta qualidade de vida e sistema de bem-estar social avançado.</p>
   </div>
+
+  <style>
+    .content-home {
+      background-image: url('assets/images/viking.png');
+      background-size: cover;
+      background-position: center;
+      min-height: 80vh;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #f0f4f8f3;
+      z-index: 1;
+    }
+
+    h1, p {
+      position: relative;
+      z-index: 2;
+    }
+  </style>
 </div>
