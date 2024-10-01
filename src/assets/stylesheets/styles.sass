@@ -1,0 +1,211 @@
+@tailwind base
+@tailwind components
+@tailwind utilities
+
+/*
+  Table of Contents
+  ----------------------------------------------------------------------
+  01. Global Styles
+  02. Variables
+  03. Mixins
+  04. Base Styles
+  05. Link Styles
+  06. Button Styles
+  07. Icon Styles
+  08. Image Styles
+  09. Header
+  10. Main
+  11. Footer
+  ---------------------------------------------------------------------- */
+
+/* 01. Global Styles
+  ---------------------------------------------------------------------- */
+::-webkit-scrollbar
+  width: 7px
+
+::-webkit-scrollbar-track
+  background: #2D3748
+
+::-webkit-scrollbar-thumb
+  background: #CBD5E0
+
+::-webkit-scrollbar-thumb:hover
+  background: #718096
+
+/* 02. Variables
+  ---------------------------------------------------------------------- */
+$dark: #1a1a1a
+$light: #f0f4f8
+$link: #4493f8
+
+$font-sizes: h1 2.5rem, h2 2rem, h3 1.75rem, h4 1.5rem
+@each $element, $size in $font-sizes
+  #{$element}
+    font-size: $size
+
+/* 03. Mixins
+  ---------------------------------------------------------------------- */
+@mixin transition($time: 500ms, $props: all, $timing-function: ease-in-out)
+  -webkit-transition: $props $time $timing-function
+  -moz-transition: $props $time $timing-function
+  -o-transition: $props $time $timing-function
+  transition: $props $time $timing-function
+
+/* 04. Base Styles
+  ---------------------------------------------------------------------- */
+*
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+
+html, body
+  @apply antialiased
+  height: 100vh
+  color: $dark
+  background: $light
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+  font-family: Arial, sans-serif
+  @include transition(0.2s, color)
+
+  ul
+    list-style: none
+/* 05. Link Styles
+  ---------------------------------------------------------------------- */
+a
+  text-decoration: none
+  padding: 0.5rem 1rem
+  border-radius: 0.25rem
+  color: $dark
+
+  &:hover
+    color: $link
+    text-decoration: underline
+    transform: scale(1.1)
+    @include transition(400ms)
+
+/* 06. Button Styles
+  ---------------------------------------------------------------------- */
+button
+  @apply bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full
+
+/* 07. Icon Styles
+  ---------------------------------------------------------------------- */
+fa-icon
+  cursor: pointer
+
+/* 08. Image Styles
+  ---------------------------------------------------------------------- */
+img
+  cursor: pointer
+  object-fit: contain
+  width: 100%
+  height: 100%
+
+/* 09. Header
+  ---------------------------------------------------------------------- */
+#header
+  position: fixed
+  top: 0
+  left: 0
+  width: 100vw
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  color: $dark
+  text-align: center
+  vertical-align: middle
+  background-color: white
+  z-index: 999
+  @include transition(400ms, background-color)
+
+  & > div
+    padding: 16px 0
+    z-index: 20
+
+  &::before
+    content: ''
+    position: absolute
+    top: -100%
+    left: 0
+    width: 100%
+    height: 100%
+    background-color: lighten($light, 20%)
+    z-index: 10
+    @include transition()
+
+  &.scrolled::before
+    transform: translateY(100%)
+    transition: border-bottom 0.2s ease-out, background-color 0.9s ease
+
+  &.scrolled
+    @apply border-b-2 border-denmark-red bg-denmark-red shadow-md
+
+/* 10. content
+  ---------------------------------------------------------------------- */
+.content-wrapper
+  @apply flex items-center justify-center h-screen px-6 bg-denmark-light border-denmark-red
+  .content
+    @apply container w-full p-6
+
+/* 11. Footer
+  ---------------------------------------------------------------------- */
+#footer
+  position: relative
+  vertical-align: middle
+  display: flex
+  align-items: center
+  background-color: white
+
+  .container
+    padding: 24px 0 24px 0
+
+  &::before
+    content: ''
+    position: absolute
+    bottom: 100%
+    left: 0
+    width: 100%
+    height: 1px
+    z-index: 1
+    @apply bg-denmark-red
+
+.custom-form input:not([type='checkbox'])
+  @apply block w-full border border-blue-300 rounded-md focus:ring focus:ring-opacity-40 focus:ring-gray-300 py-2 px-4
+
+
+/* 11. Footer
+  ---------------------------------------------------------------------- */
+.content-wrapper
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+  padding-left: 1rem
+  padding-right: 1rem
+
+.content
+  container: true
+  margin-left: auto
+  margin-right: auto
+  padding: 1.5rem
+  flex: 1
+
+h1, p
+  font-size: 0.875rem
+  @media (min-width: 768px)
+    font-size: 1rem
+
+#footer
+  display: flex
+  align-items: center
+  justify-content: center
+  padding: 1rem
+
+  .container
+    color: white
+    text-align: center
+
+.overlay
+  background-color: rgba(240, 244, 248, 0.95)

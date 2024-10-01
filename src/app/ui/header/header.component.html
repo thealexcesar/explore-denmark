@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="flex justify-between items-center space-x-2">
+    <fa-icon [icon]="['fas', 'home']" [routerLink]="['']"/>
+
+    <div class="block md:hidden">
+      <button (click)="toggleMenu()" class="text-denmark-red focus:outline-none">
+        <fa-icon [icon]="['fas', 'bars']"></fa-icon>
+      </button>
+    </div>
+    <denmark-nav-links/>
+  </div>
+</div>
