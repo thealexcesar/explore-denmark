@@ -1,10 +1,9 @@
 import {Component} from '@angular/core';
 import {UserService} from "@services/user.service";
 import {Router} from "@angular/router";
-import {FormsModule} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {MaterialModules} from "../../shared/modules/material-modules";
-import {UserParams} from "@models/user/user-params";
 
 @Component({
   selector: 'denmark-login',
@@ -13,28 +12,67 @@ import {UserParams} from "@models/user/user-params";
     FormsModule,
     MaterialModules,
     NgIf,
+    ReactiveFormsModule,
   ],
   templateUrl: './login.component.html',
   styles: ``
 })
 export class LoginComponent {
-  user: UserParams = { email: '', password: '', name: '' };
-  isSignIn = true;
-  email: string = '';
-  password: string = '';
+  authForm: FormGroup;
+  isSignUp: boolean = false;
 
-  constructor(private authService: UserService, private router: Router) {}
-
-  onSubmit(): void {
-    const action = this.isSignIn ? 'sign_in' : 'sign_up';
-    this.authService.authenticate(action, this.user).subscribe({
-      next: () => this.router.navigate(['']),
-      error: (error) => console.error(`${action} error:`, error)
+  constructor(
+    private fb: FormBuilder,
+    private user: UserService,
+    private router: Router,
+  ) {
+    this.authForm = this.fb.group({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      avatar: new FormControl('')
     });
   }
 
-  toggleSign(): void {
-    this.isSignIn = !this.isSignIn;
-    this.isSignIn && this.user.name;
+  onSubmit(): void {
+    if (!this.authForm.valid) {
+      // this.toastr.warning('Por favor, preencha todos os campos requeridos corretamente.', 'Warning')
+      return;
+    }
+    this.isSignUp ? this.handleSignUp() : this.handleSignIn();
+  }
+
+  toggleSign() {
+    this.isSignUp = !this.isSignUp;
+  }
+
+  private handleSignUp(): void {
+    this.user.create(this.authForm.value).subscribe({
+      next: () => {
+        // this.toastr.success('Usuário criado com sucesso.', 'Success');
+        this.router.navigate(['/login']).then(r => console.log('router:', r));
+      },
+      error: () => {
+        // this.toastr.error('Erro ao criar usuário', 'Error');
+      }
+    });
+  }
+
+  private handleSignIn(): void {
+    const loginData = {
+      email: this.authForm.value.email,
+      password: this.authForm.value.password
+    };
+
+    this.user.login(loginData).subscribe({
+      next: (response: any) => {
+        localStorage.setItem("token", response.access_token);
+        localStorage.setItem("role", response.access_role);
+        this.router.navigateByUrl('').then(r => console.log('Erro:', r));
+      },
+      error: () => {
+        // this.toastr.error('Invalid username or password', 'Error');
+      }
+    });
   }
 }

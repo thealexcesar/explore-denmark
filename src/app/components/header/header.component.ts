@@ -5,9 +5,15 @@ import {MatButton} from "@angular/material/button";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
+<<<<<<< HEAD
 import {AuthService} from "@services/auth.service";
 import {UserModel} from "@models/user/user-model";
 import {NavLinksComponent} from "../nav-links/nav-links.component";
+=======
+import {UserService} from "@services/user.service";
+import {NavLinksComponent} from "../nav-links/nav-links.component";
+import {User} from "@models/user/user";
+>>>>>>> feature/jwt-json-server
 
 @Component({
   selector: 'denmark-header',
@@ -29,21 +35,15 @@ import {NavLinksComponent} from "../nav-links/nav-links.component";
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn: boolean = false;
-  currentUser: UserModel | string = '';
+  currentUser: User | null = null;
   isScrolled: boolean = false;
   menuOpen: boolean = false;
 
-  constructor(
-    private router: Router,
-    private authService: AuthService
-
-  ) {}
+  constructor(private router: Router, private user: UserService) {}
 
   ngOnInit(): void {
-    this.isLoggedIn = this.authService.isLoggedIn();
-    this.currentUser = this.isLoggedIn ? this.authService.getCurrentUser() : '';
+    this.isLoggedIn = this.user.isLoggedIn();
   }
-
   @HostListener('window:scroll', [])
   onWindowScroll() {
     const header = document.getElementById('header');
@@ -55,13 +55,6 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleMenu(): void {
-    console.log('open?', this.menuOpen)
     this.menuOpen = !this.menuOpen;
   }
-
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }
-
 }

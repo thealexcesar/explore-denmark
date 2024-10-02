@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {HeaderComponent} from "./components/header/header.component";
 import {FaIconLibrary} from "@fortawesome/angular-fontawesome";
@@ -22,11 +22,9 @@ import {NavbarComponent} from "@components/navbar/navbar.component";
     ArticlesComponent,
     FooterComponent,
     HeaderComponent,
-    HomeComponent,
     DemographyComponent,
     EconomyComponent,
     HistoryComponent,
-    LoginComponent,
     NavbarComponent,
 
     MaterialModules,
