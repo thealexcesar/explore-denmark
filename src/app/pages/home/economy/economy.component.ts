@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
-import {NavLinksComponent} from "@ui/nav-links/nav-links.component";
+import {NavLinksComponent} from "@components/nav-links/nav-links.component";
 import {RouterOutlet} from "@angular/router";
 
 @Component({
-  selector: 'denmark-geography',
+  selector: 'denmark-economy',
   standalone: true,
   imports: [
     NavLinksComponent,
     RouterOutlet
   ],
-  templateUrl: './geography.component.html',
+  templateUrl: './economy.component.html',
   styles: ``
 })
-export class GeographyComponent {
+export class EconomyComponent {
 
 }

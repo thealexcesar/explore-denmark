@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {RouterLink, RouterOutlet} from "@angular/router";
-import {NavLinksComponent} from "@ui/nav-links/nav-links.component";
-import {DemographyComponent} from "@pages/denmark/demography/demography.component";
-import {EconomyComponent} from "@pages/denmark/economy/economy.component";
-import {GeographyComponent} from "@pages/denmark/geography/geography.component";
-import {HistoryComponent} from "@pages/denmark/history/history.component";
+import {NavLinksComponent} from "@components/nav-links/nav-links.component";
+import {DemographyComponent} from "@pages/home/demography/demography.component";
+import {EconomyComponent} from "@pages/home/economy/economy.component";
+import {GeographyComponent} from "@pages/home/geography/geography.component";
+import {HistoryComponent} from "@pages/home/history/history.component";
+import {NavbarComponent} from "@components/navbar/navbar.component";
 
 @Component({
   selector: 'denmark-home',
@@ -14,7 +15,11 @@ import {HistoryComponent} from "@pages/denmark/history/history.component";
     CommonModule,
     RouterLink,
     RouterOutlet,
-    NavLinksComponent
+    NavLinksComponent,
+    NavbarComponent,
+    DemographyComponent,
+    HistoryComponent,
+    EconomyComponent
   ],
   templateUrl: './home.component.html'
 })

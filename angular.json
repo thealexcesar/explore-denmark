@@ -35,7 +35,8 @@
             ],
             "styles": [
               "src/custom-theme.scss",
-              "src/assets/stylesheets/styles.sass"
+              "src/assets/stylesheets/styles.sass",
+              "src/assets/stylesheets/custom.scss"
             ],
             "scripts": []
           },
@@ -100,7 +101,8 @@
               }
             ],
             "styles": [
-              "src/app/assets/stylesheets/styles.sass"
+              "src/app/assets/stylesheets/styles.sass",
+              "src/assets/stylesheets/custom.scss"
             ],
             "scripts": []
           }

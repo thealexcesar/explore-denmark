@@ -27,6 +27,7 @@
     "paths": {
       "@assets/*": ["assets/*"],
       "@images/*": ["assets/images/*"],
+      "@components/*": ["app/components/*"],
       "@environments/*": ["environments/*"],
       "@pages/*": ["app/pages/*"],
       "@login/*": ["app/pages/login/*"],

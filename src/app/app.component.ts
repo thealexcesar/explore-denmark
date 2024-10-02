@@ -1,18 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {HeaderComponent} from "@ui/header/header.component";
+import {HeaderComponent} from "./components/header/header.component";
 import {FaIconLibrary} from "@fortawesome/angular-fontawesome";
 import {fas} from "@fortawesome/free-solid-svg-icons";
-import {HomeComponent} from "@pages/denmark/home/home.component";
+import {HomeComponent} from "@pages/home/home.component";
 import {CommonModule} from "@angular/common";
 import {LoginComponent} from "@login/login.component";
-import {FooterComponent} from "@ui/footer/footer.component";
+import {FooterComponent} from "./components/footer/footer.component";
 import {MaterialModules} from "./shared/modules/material-modules";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import {EconomyComponent} from "@pages/denmark/economy/economy.component";
-import {DemographyComponent} from "@pages/denmark/demography/demography.component";
-import {HistoryComponent} from "@pages/denmark/history/history.component";
+import {EconomyComponent} from "@pages/home/economy/economy.component";
+import {DemographyComponent} from "@pages/home/demography/demography.component";
+import {HistoryComponent} from "@pages/home/history/history.component";
 import {ArticlesComponent} from "@pages/articles/articles.component";
+import {NavbarComponent} from "@components/navbar/navbar.component";
 
 @Component({
   selector: 'denmark-root',
@@ -26,6 +27,7 @@ import {ArticlesComponent} from "@pages/articles/articles.component";
     EconomyComponent,
     HistoryComponent,
     LoginComponent,
+    NavbarComponent,
 
     MaterialModules,
     CommonModule,
@@ -33,7 +35,7 @@ import {ArticlesComponent} from "@pages/articles/articles.component";
 
     RouterOutlet
   ],
-  template: `<denmark-header id="header"/> <router-outlet/> <denmark-footer id="footer"/>`
+  template: `<denmark-navbar/> <router-outlet/> <denmark-footer/>`
 })
 export class AppComponent {
   title = 'explore-denmark';

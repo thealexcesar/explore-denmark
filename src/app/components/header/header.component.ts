@@ -7,7 +7,7 @@ import {MatOption, MatSelect} from "@angular/material/select";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {AuthService} from "@services/auth.service";
 import {UserModel} from "@models/user/user-model";
-import {NavLinksComponent} from "@ui/nav-links/nav-links.component";
+import {NavLinksComponent} from "../nav-links/nav-links.component";
 
 @Component({
   selector: 'denmark-header',
