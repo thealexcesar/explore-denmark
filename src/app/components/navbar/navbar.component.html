@@ -30,7 +30,7 @@
 
     <div class="flex content-between items-center gap-4">
       <button type="button" (click)="toggleTheme()" title="Trocar Tema para {{ themeIcon == 'sun' ? 'Escuro' : 'Claro' }}">
-        <fa-icon [icon]="['far', themeIcon]"/>
+        <fa-icon [icon]="['fas', themeIcon]"/>
       </button>
 
       <button *ngIf="isLoggedIn"  type="button" (click)="logout()">Logout</button>
