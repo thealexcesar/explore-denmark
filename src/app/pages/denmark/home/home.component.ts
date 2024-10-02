@@ -1,11 +1,14 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {RouterLink, RouterOutlet} from "@angular/router";
-import {NavLinksComponent} from "@ui/nav-links/nav-links.component";
+import {NavLinksComponent} from "../../../components/nav-links/nav-links.component";
 import {DemographyComponent} from "@pages/denmark/demography/demography.component";
 import {EconomyComponent} from "@pages/denmark/economy/economy.component";
 import {GeographyComponent} from "@pages/denmark/geography/geography.component";
 import {HistoryComponent} from "@pages/denmark/history/history.component";
+import {User} from "@models/user/user";
+import {UserService} from "@services/user.service";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'denmark-home',
@@ -14,13 +17,16 @@ import {HistoryComponent} from "@pages/denmark/history/history.component";
     CommonModule,
     RouterLink,
     RouterOutlet,
-    NavLinksComponent
+    NavLinksComponent,
+    FormsModule
   ],
   templateUrl: './home.component.html'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   title = 'explore-denmark';
-
+  nameFilter: string = '';
+  limit: number = 100;
+  limitOptions: number[] = [100, 10, 15];
   linksScroll = [
     { path: 'intro', label: 'home' },
     { path: 'culture', label: 'culture' },
@@ -33,4 +39,25 @@ export class HomeComponent {
     { path: '/article', label: 'article' },
     { path: '/login', label: 'login' }
   ];
+  users: User[] = [];
+
+  constructor(private userService: UserService) {}
+
+  ngOnInit(): void {
+    this.getUsers();
+  }
+
+  getUsers(): void {
+    this.userService.getUsers(this.nameFilter, this.limit).subscribe(data => {
+      this.users = data;
+    });
+  }
+
+  onSearch(): void {
+    this.getUsers();
+  }
+
+  onLimitChange(): void {
+    this.getUsers();
+  }
 }

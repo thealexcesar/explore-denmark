@@ -10,7 +10,8 @@ RUN npm install
 
 COPY . .
 
-RUN ng build
+RUN ng cache clean && \
+    ng build --configuration production --output-hashing=all --aot
 
 EXPOSE 4200
 

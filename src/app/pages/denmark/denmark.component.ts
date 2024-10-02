@@ -1,6 +1,6 @@
 /*
 import { Component } from '@angular/core';
-import {NavLinksComponent} from "@ui/nav-links/nav-links.component";
+import {NavLinksComponent} from "@components/nav-links/nav-links.component";
 import {RouterLink, RouterOutlet} from "@angular/router";
 import {DemographyComponent} from "@pages/denmark/demography/demography.component";
 import {EconomyComponent} from "@pages/denmark/economy/economy.component";

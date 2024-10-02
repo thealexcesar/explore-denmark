@@ -1,7 +1,10 @@
 <div class="content-wrapper flex flex-col h-screen pt-20">
   <div class="container mx-auto content geography relative flex-1 pt-10">
     <div class="overlay home"></div>
-    <h1 class="text-denmark-red mb-4">Dinamarca</h1>
+
+
+
+      <h1 class="text-denmark-red mb-4">Dinamarca</h1>
     <p class="mb-4">
       A Dinamarca, um dos países nórdicos, é rica em história e cultura, com raízes que remontam
       à Era Viking, aproximadamente entre os séculos VIII e XI. Durante esse período, os dinamarqueses se
@@ -22,6 +25,113 @@
       evolução de um povo que começou como exploradores destemidos e se tornou uma nação reconhecida
       pela sua alta qualidade de vida e sistema de bem-estar social avançado.
     </p>
+
+    <div class="mt10 mb-10">
+      <div>
+        <input type="text" placeholder="Buscar por nome" [(ngModel)]="nameFilter" (input)="onSearch()" />
+
+        <label for="limit">Resultados por página:</label>
+        <select id="limit" [(ngModel)]="limit" (change)="onLimitChange()">
+          <option *ngFor="let option of limitOptions" [value]="option">{{ option }}</option>
+        </select>
+      </div>
+
+
+
+      <table>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Função</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Função</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <thead>
+        <tr class="mt-20 pt-20">
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Função</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Função</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <table>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Função</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+        </tr>
+        </tbody>
+      </table>
 
     <!--TODO TABLE-->
    <!-- <div class="mt-6">

@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {HeaderComponent} from "@ui/header/header.component";
+import {HeaderComponent} from "./components/header/header.component";
 import {FaIconLibrary} from "@fortawesome/angular-fontawesome";
 import {fas} from "@fortawesome/free-solid-svg-icons";
 import {HomeComponent} from "@pages/denmark/home/home.component";
 import {CommonModule} from "@angular/common";
 import {LoginComponent} from "@login/login.component";
-import {FooterComponent} from "@ui/footer/footer.component";
+import {FooterComponent} from "./components/footer/footer.component";
 import {MaterialModules} from "./shared/modules/material-modules";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {EconomyComponent} from "@pages/denmark/economy/economy.component";
@@ -33,7 +33,16 @@ import {ArticlesComponent} from "@pages/articles/articles.component";
 
     RouterOutlet
   ],
-  template: `<denmark-header id="header"/> <router-outlet/> <denmark-footer id="footer"/>`
+  template: `
+<!--    <denmark-header id="header"/> <router-outlet/> <denmark-footer id="footer"/>-->
+<denmark-header></denmark-header>
+<div class="denmark-container">
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>
+<denmark-footer></denmark-footer>
+  `
 })
 export class AppComponent {
   title = 'explore-denmark';

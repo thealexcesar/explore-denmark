@@ -1,12 +1,16 @@
 import {RoleType} from "@models/enums/RoleType";
 
-export interface User {
-  id: number | string;
+export interface UserParams {
+  email: string,
+  name?: string
+  password: string,
+}
+
+export interface UserForm extends UserParams {
   avatar: string;
-  email: string;
-  dateOfBirth?: Date | null | string;
-  isActive: boolean;
-  name: string;
-  password: string;
-  role: RoleType | string;
+  role: RoleType;
+}
+
+export interface User extends UserParams, UserForm {
+  id: number | string;
 }

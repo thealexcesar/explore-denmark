@@ -45,11 +45,8 @@
   "users": [
     {
       "id": 1,
-      "first_name": "Admin",
-      "last_name": "User",
       "email": "admin@gmail.com",
-      "password": "admin123",
-      "roles": "admin"
+      "password": "admin123"
     }
   ]
 }

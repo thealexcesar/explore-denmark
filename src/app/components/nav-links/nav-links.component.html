@@ -1,11 +1,20 @@
 <nav>
   <ul [ngClass]="{'hidden': !menuOpen, 'block': menuOpen, 'md:flex': true}" class="flex-col md:flex-row md:flex md:space-x-6 items-center">
-    <li><a [routerLink]="['demography']">Demography</a></li>
+  <!--  <li><a [routerLink]="['demography']">Demography</a></li>
     <li><a [routerLink]="['history']">History</a></li>
     <li><a [routerLink]="['economy']">Economy</a></li>
-    <li><a [routerLink]="['/articles']">Articles</a></li>
-
+    <li><a [routerLink]="['/articles']">Articles</a></li>-->
+    <li>
+      <ul class="flex justify-between">
+        <li><a [routerLink]="['/admin/dashboard']">Dashboard</a></li>
+        <li><a [routerLink]="['/admin/articles']">Artigos</a></li>
+        <li><a [routerLink]="['/admin/articles/new']">Novo Artigo</a></li>
+        <li><a [routerLink]="['/admin/users']">Usuários</a></li>
+        <li><a [routerLink]="['/admin/users/new']">Novo Usuário</a></li>
+      </ul>
+    </li>
+<!--
     <button *ngIf="isLoggedIn" class="btn btn-danger" (click)="logout()">Logout</button>
-    <button *ngIf="!isLoggedIn" class="btn btn-primary" [routerLink]="['/login']">Login</button>
+    <button *ngIf="!isLoggedIn" class="btn btn-primary" [routerLink]="['/login']">Login {{isLoggedIn}}</button>-->
   </ul>
 </nav>

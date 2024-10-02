@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  // apiUrl: 'http://localhost:8080',
-  apiUrl: 'https://api.escuelajs.co/api/v1'
+  userUrl: 'https://api.escuelajs.co/api/v1',
+  denmarkUrl: 'http://localhost:3000'
 };

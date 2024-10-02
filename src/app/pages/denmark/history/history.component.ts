@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavLinksComponent} from "@ui/nav-links/nav-links.component";
+import {NavLinksComponent} from "../../../components/nav-links/nav-links.component";
 import {RouterOutlet} from "@angular/router";
 
 @Component({

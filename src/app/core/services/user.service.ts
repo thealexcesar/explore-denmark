@@ -1,96 +1,85 @@
 import {Injectable, Injector} from '@angular/core';
-import {BehaviorSubject, catchError, Observable, tap} from "rxjs";
-import {defaultAuthStatus} from "@models/auth/default-auth-status";
-import {UserModel} from "@models/user/user-model";
+import {catchError, Observable, tap, throwError} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {AuthStatus} from "@models/auth/auth-status";
-import {ServerAuthResponse} from "@models/auth/server-auth-status";
-import {User} from "@models/user/user";
-import {RoleType} from "@models/enums/RoleType";
+import {User, UserParams} from "@models/user/user";
 import {environment} from "@environments/environment";
-import {CommonErrors} from "../common/common-errors";
-import {UserParams} from "@models/user/user-params";
+import {ServerAuthResponse} from "@models/auth/server-auth-status";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-  private readonly tokenKey = 'token';
-  private readonly authStatus = new BehaviorSubject<AuthStatus>(defaultAuthStatus);
-  private readonly currentUser = new BehaviorSubject<UserModel>(new UserModel());
-  private readonly url = environment.apiUrl;
+export class UserService {
+  private readonly url = environment.userUrl;
+  constructor(private http: HttpClient) {}
 
-  constructor(private httpClient: HttpClient, private injector: Injector) {
-    const token = this.getToken();
-    if (token) {
-      this.setToken(token);
+  getUsers(nameFilter?: string, limit: number = 10): Observable<User[]> {
+    let url = `${this.url}/users?limit=${limit}`;
+    if (nameFilter) {
+      url += `&name=${encodeURIComponent(nameFilter)}`;
     }
+    return this.http.get<User[]>(url);
   }
 
-  authenticate(action: 'sign_in' | 'sign_up', params: UserParams): Observable<ServerAuthResponse> {
-    const endpoint = this.getEndpoint(action);
-    const body = this.createRequestBody(action, params);
-
-    return this.httpClient.post<ServerAuthResponse>(endpoint, body, {withCredentials: false})
-      .pipe(
-        tap((res) => this.handleAuthResponse(res, action, body)),
-        catchError((error) => this.common.handleError(error))
-      );
+  login(login: UserParams): Observable<ServerAuthResponse> {
+    return this.http.post<ServerAuthResponse>(`${this.url}/auth`, login).pipe(
+      tap(response => this.handleAuthResponse(response, 'login')),
+      catchError(this.handleError('login'))
+    );
   }
 
-  getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+  create(user: UserParams): Observable<any> {
+    return this.http.post<any>(`${this.url}/users/is-available`, user).pipe(
+      tap(response => this.handleAuthResponse(response, 'create')),
+      catchError(this.handleError('create'))
+    );
   }
 
   isLoggedIn(): boolean {
-    return !!this.getToken();
+    const token = localStorage.getItem('token');
+    return token !== null;
   }
 
-  getCurrentUser(): UserModel {
-    return this.currentUser.getValue();
+
+  getCurrentUser(): User | null {
+    const currentUserData = localStorage.getItem('currentUser');
+
+    if (!currentUserData) {
+      console.warn("No current user found in localStorage.");
+      return null;
+    }
+
+    try {
+      return JSON.parse(currentUserData);
+    } catch (error) {
+      console.error("Error parsing current user data:", error);
+      return null;
+    }
   }
 
   logout(): void {
-    this.setToken('');
-    this.currentUser.next(new UserModel());
-    this.authStatus.next(defaultAuthStatus);
+    localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
   }
 
-  private getEndpoint(action: 'sign_in' | 'sign_up'): string {
-    return `${this.url}/auth/${action}`;
-  }
+  updateUserStatus(): void {
+    const user = this.getCurrentUser();
+    if (user) {
 
-  private handleAuthResponse(res: ServerAuthResponse, action: 'sign_in' | 'sign_up', body: UserParams): void {
-    this.setToken(res.accessToken);
-
-    if (action === 'sign_in') {
-      if (res.user) this.currentUser.next(new UserModel().build(res.user));
-      return;
+    } else {
+      console.warn("User is not defined.");
     }
+  }
 
-    const newUser: User = {
-      id: 0,
-      avatar: '',
-      email: body.email,
-      dateOfBirth: null,
-      isActive: true,
-      name: (body as UserParams).name || '',
-      password: body.password,
-      role: RoleType.USER
+  private handleAuthResponse(response: ServerAuthResponse, action: 'login' | 'create'): void {
+    console.log(action === 'login' ? 'Usuário logado com sucesso:' : 'Usuário criado com sucesso:', response);
+    localStorage.setItem('token', response.token);
+    localStorage.setItem('currentUser', JSON.stringify(response.user));
+  }
+
+  private handleError(operation: string) {
+    return (error: any): Observable<never> => {
+      console.error(`${operation} falhou:`, error);
+      return throwError(() => new Error(`${operation} falhou. Tente novamente mais tarde.`));
     };
-    this.currentUser.next(new UserModel().build(newUser));
-  }
-
-  private setToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
-  }
-
-  private createRequestBody(action: 'sign_in' | 'sign_up', params: UserParams): any {
-    const baseBody = {email: params.email, password: params.password};
-    return action === 'sign_up' ? {...baseBody, name: (params as UserParams).name} : baseBody;
-  }
-
-  private get common() {
-    return this.injector.get(CommonErrors);
   }
 }

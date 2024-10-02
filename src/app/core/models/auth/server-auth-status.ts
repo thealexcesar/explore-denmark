@@ -1,3 +1,7 @@
+import {User} from "@models/user/user";
+
 export interface ServerAuthResponse {
-  accessToken: string;
+  token: string;
+  refreshToken?: string;
+  user?: User;
 }
