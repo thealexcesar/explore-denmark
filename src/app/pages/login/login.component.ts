@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {MaterialModules} from "../../shared/modules/material-modules";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'denmark-login',
@@ -20,11 +21,13 @@ import {MaterialModules} from "../../shared/modules/material-modules";
 export class LoginComponent {
   authForm: FormGroup;
   isSignUp: boolean = false;
+  private status: string = 'error'
 
   constructor(
     private fb: FormBuilder,
     private user: UserService,
     private router: Router,
+    private toast: ToastrService
   ) {
     this.authForm = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -36,7 +39,7 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (!this.authForm.valid) {
-      // this.toastr.warning('Por favor, preencha todos os campos requeridos corretamente.', 'Warning')
+      (this.toast as any)[this.status]('Por favor, preencha todos os campos requeridos corretamente.', 'Alerta');
       return;
     }
     this.isSignUp ? this.handleSignUp() : this.handleSignIn();
@@ -49,11 +52,13 @@ export class LoginComponent {
   private handleSignUp(): void {
     this.user.create(this.authForm.value).subscribe({
       next: () => {
-        // this.toastr.success('Usuário criado com sucesso.', 'Success');
+        this.status = 'success';
+        // (this.toast as any)[this.status](this.status, 'created' | translate, this.status | translate); // TCC referencia -> fazer funcao generica.
+        (this.toast as any)[this.status](this.status, 'Usuário criado com sucesso.', "Sucesso");
         this.router.navigate(['/login']).then(r => console.log('router:', r));
       },
       error: () => {
-        // this.toastr.error('Erro ao criar usuário', 'Error');
+        (this.toast as any)[this.status](this.status, 'Erro ao criar usuário', 'Erro');
       }
     });
   }
@@ -68,10 +73,10 @@ export class LoginComponent {
       next: (response: any) => {
         localStorage.setItem("token", response.access_token);
         localStorage.setItem("role", response.access_role);
-        this.router.navigateByUrl('').then(r => console.log('Erro:', r));
+        this.router.navigateByUrl('').then(r => console.log('redirect:', r));
       },
       error: () => {
-        // this.toastr.error('Invalid username or password', 'Error');
+        (this.toast as any)[this.status](this.status, 'Usuário ou senha inválidos', 'Erro');
       }
     });
   }

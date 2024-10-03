@@ -63,4 +63,12 @@
     dark:border-gray-700
   }
 
+  .my-toast {
+    @apply bg-green-500 text-white rounded-lg p-4 shadow-lg;
+    &.error { @apply bg-red-500; }
+    &.success { @apply bg-green-500; }
+    &.warning { @apply bg-yellow-500; }
+    &.info { @apply bg-blue-500; }
+  }
+
 }

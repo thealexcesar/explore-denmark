@@ -1,90 +1,87 @@
-<<<<<<< HEAD
-<section class="flex flex-column container  items">
+<section class="flex flex-column container items">
   <div class="mx-auto max-w-screen-xl text-left lg:py-16">
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="max-w-sm mx-auto">
+      <h2 class="text-2xl mb-5">{{ isSignUp ? 'Criar Conta' : 'Entrar' }}</h2>
 
-    <form class="max-w-sm mx-auto">
-      <div class="mb-5">
-        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-        <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
+      <div class="mb-5" *ngIf="isSignUp">
+        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seu nome</label>
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Digite seu nome"
+          required
+        />
+        <mat-error *ngIf="authForm.get('name')?.hasError('required') && authForm.get('name')?.untouched">
+          O nome é obrigatório.
+        </mat-error>
+        <mat-error *ngIf="authForm.get('name')?.hasError('minlength') && authForm.get('name')?.untouched">
+          O nome deve ter pelo menos 3 caracteres.
+        </mat-error>
       </div>
+
       <div class="mb-5">
-        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-        <input type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seu email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="name@flowbite.com"
+          required
+        />
+        <mat-error *ngIf="authForm.get('email')?.hasError('required') && !authForm.get('email')?.untouched">
+          O email é obrigatório.
+        </mat-error>
+        <mat-error *ngIf="authForm.get('email')?.hasError('email') && !authForm.get('email')?.untouched">
+          O email deve ser válido.
+        </mat-error>
       </div>
+
+      <div class="mb-5">
+        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sua senha</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          required
+        />
+        <mat-error *ngIf="authForm.get('password')?.hasError('required') && !authForm.get('password')?.untouched">
+          A senha é obrigatória.
+        </mat-error>
+        <mat-error *ngIf="authForm.get('password')?.hasError('minlength') && !authForm.get('password')?.untouched">
+          A senha deve ter pelo menos 6 caracteres.
+        </mat-error>
+      </div>
+
       <div class="flex items-start mb-5">
         <div class="flex items-center h-5">
-          <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
+          <input
+            id="remember"
+            type="checkbox"
+            value=""
+            class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+          />
         </div>
-        <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
+        <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Lembrar de mim</label>
       </div>
-      <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-    </form>
 
+      <button
+        type="submit"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      >
+        {{ isSignUp ? 'Criar Conta' : 'Entrar' }}
+      </button>
+
+      <button
+        type="button"
+        (click)="toggleSign()"
+        class="mt-4 text-sm text-blue-600 hover:underline dark:text-blue-500"
+      >
+        {{ isSignUp ? 'Já possui uma conta? Entrar' : 'Não tem uma conta? Criar' }}
+      </button>
+    </form>
   </div>
 </section>
-=======
-<div class="content-wrapper">
-  <div class="content flex justify-center items-center">
-    <div class="border border-denmark-red bg-white p-10 rounded shadow-md w-96">
-      <div class="flex items-center justify-start">
-        <img src="./assets/images/viking.png" alt="Logo: Viking" class="w-12 h-12 border rounded-md border-gray-300">
-        <h2 class="text-gray-700 ml-4 text-[24px]">{{ isSignUp ? 'Faça seu Cadastro' : 'Faça seu login'}}</h2>
-      </div>
-
-      <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="mt-4 custom-form">
-        <div class="mb-4" *ngIf="isSignUp">
-          <label for="name" class="block text-sm font-medium text-gray-700">Nome</label>
-          <input type="text" id="name" formControlName="name"
-                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-fuji-blue focus:border-transparent"
-                 placeholder="Nome" aria-label="Nome" required>
-          <div *ngIf="authForm.get('name')?.hasError('required') && authForm.get('name')?.touched" class="form-error">
-            Nome é obrigatório
-          </div>
-        </div>
-
-        <div class="mb-4">
-          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-          <input type="email" id="email" formControlName="email"
-                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-fuji-blue focus:border-transparent"
-                 placeholder="Email" required>
-          <div *ngIf="authForm.get('email')?.hasError('required') && authForm.get('email')?.touched" class="form-error">
-            Email é obrigatório
-          </div>
-        </div>
-
-        <div class="mb-4">
-          <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
-          <input type="password" id="password" formControlName="password"
-                 class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-fuji-blue focus:border-transparent"
-                 placeholder="Senha" required>
-          <div *ngIf="authForm.get('password')?.hasError('required') && authForm.get('password')?.touched" class="form-error">
-            Senha é obrigatória
-          </div>
-        </div>
-
-        <div class="flex items-center justify-between mb-4 w-full">
-          <div class="flex justify-start items-center p-0" style="width: 220px;">
-            <label for="remember" class="flex justify-start items-center p-0">
-              <input id="remember" type="checkbox" name="remember"
-                     class="border text-blue-600 rounded-md transition duration-200"/>
-              <span class="text-sm w-full ml-2">Lembre-me</span>
-            </label>
-          </div>
-          <span *ngIf="!isSignUp" class="block text-[8px] text-gray-600 hover:underline cursor-pointer">Esqueceu sua Senha?</span>
-        </div>
-
-        <div *ngIf="authForm.invalid && (authForm.dirty || !authForm.untouched)" class="text-red-500 mb-4 text-center">
-          Credenciais inválidas.
-        </div>
-
-        <div class="mt-6 w-full flex justify-between items-center">
-          <p class="text-sm cursor-pointer text-gray-600 hover:underline hover:text-denmark-link" (click)="toggleSign()">
-            {{ isSignUp ? 'Já possui Conta? Faça Login' : 'Não tem Cadastro? Registre-se' }}
-          </p>
-          <button type="submit" class="text-sm" [disabled]="authForm.invalid">Salvar</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
->>>>>>> feature/jwt-json-server
