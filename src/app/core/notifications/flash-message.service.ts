@@ -7,7 +7,7 @@ import {Type} from "./type";
 })
 export class FlashMessageService {
   private notificationsSubject = new BehaviorSubject<Type[]>([]);
-  notifications$ = this.notificationsSubject.asObservable();
+  notifications = this.notificationsSubject.asObservable();
 
   addNotification(notification:Type) {
     const notifications = this.notificationsSubject.value;

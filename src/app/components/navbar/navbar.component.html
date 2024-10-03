@@ -4,10 +4,16 @@
     [ngClass]="{'border-b-2 border-denmark-red dark:border-gray-400': showBorder}"
   >
     <div class="flex justify-between items-center gap-4">
-      <a [routerLink]="['']" class="flex items-center space-x-2 rtl:space-x-reverse md:hidden">
-        <button (click)="toggleMenu()" type="button" class="bg-transparent" aria-controls="navbar-default" aria-expanded="false">
-          <span class="sr-only">Abrir menu</span>
-          <fa-icon [icon]="['fas', 'bars']" />
+      <a [routerLink]="['']" class="flex items-center rtl:space-x-reverse md:hidden">
+        <button
+          (click)="toggleMenu()"
+          type="button"
+          class="bg-transparent"
+          aria-controls="navbar-default"
+          [attr.aria-expanded]="isMenuOpen ? 'true' : 'false'"
+        >
+          <span class="sr-only" aria-hidden="true">Abrir menu</span>
+          <fa-icon [icon]="['fas', 'bars']"></fa-icon>
         </button>
       </a>
 
@@ -15,26 +21,41 @@
         (click)="scrollToTop()" [routerLink]="['']"
         class="flex items-center space-x-1 rtl:space-x-reverse px-2 rounded"
       >
-        <img src="assets/images/viking.png" class="h-8" alt="Viking Logo" />
+        <img src="assets/images/viking.png" class="h-8" alt="Viking Logo" title="Início" />
       </a>
     </div>
 
     <div [ngClass]="{'block': isMenuOpen, 'hidden': !isMenuOpen}" class="w-full md:block md:w-auto" id="navbar-default">
       <ul class="links">
-        <li><a (click)="scrollToSection('demography')">Demografia</a></li>
-        <li><a (click)="scrollToSection('history')">História</a></li>
-        <li><a (click)="scrollToSection('economy')">Economia</a></li>
+        <li><a (click)="scrollToSection('demography')" tabindex="0">Demografia</a></li>
+        <li><a (click)="scrollToSection('history')" tabindex="0">História</a></li>
+        <li><a (click)="scrollToSection('economy')" tabindex="0">Economia</a></li>
         <li><a [routerLink]="['/articles']">Artigos</a></li>
       </ul>
     </div>
 
     <div class="flex content-between items-center gap-4">
-      <button type="button" (click)="toggleTheme()" title="Trocar Tema para {{ themeIcon == 'sun' ? 'Escuro' : 'Claro' }}">
-        <fa-icon [icon]="['fas', themeIcon]"/>
+      <button
+        type="button"
+        (click)="toggleTheme()"
+        title="{{ switchTheme }}"
+        class="group"
+      >
+        <fa-icon
+          [icon]="['fas', themeIcon]"
+          class="icon"
+        />
       </button>
 
-      <button *ngIf="isLoggedIn"  type="button" (click)="logout()">Logout</button>
-      <button *ngIf="!isLoggedIn"  type="button" class="text-gray-900 font-semibold dark:text-white" [routerLink]="['/login']">Login</button>
+      <button *ngIf="isLoggedIn" type="button" (click)="logout()">Logout</button>
+      <button
+        type="button"
+        *ngIf="!isLoggedIn"
+        [routerLink]="['/login']"
+        class="font-semibold"
+      >
+        Login
+      </button>
     </div>
   </div>
 </nav>
