@@ -29,7 +29,13 @@ import {FooterComponent} from "@components/footer/footer.component";
     RouterOutlet,
     FooterComponent
   ],
-  template: `<denmark-navbar/> <router-outlet/> <denmark-footer/>`
+  template: `
+    <div class="flex flex-col min-h-screen">
+      <denmark-navbar />
+      <main class="flex-grow"> <router-outlet/> </main>
+      <denmark-footer />
+    </div>
+  `
 })
 export class AppComponent {
   title = 'explore-denmark';

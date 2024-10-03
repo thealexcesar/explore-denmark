@@ -24,7 +24,7 @@
   ---------------------------------------------------------------------- */
 $dark: #1a1a1a
 $light: #f0f4f8
-$link: #4493f8
+$link: #004b87
 
 $font-sizes: h1 2.5rem, h2 2rem, h3 1.75rem, h4 1.5rem
 @each $element, $size in $font-sizes
@@ -37,3 +37,15 @@ $font-sizes: h1 2.5rem, h2 2rem, h3 1.75rem, h4 1.5rem
   margin: 0
   padding: 0
   box-sizing: border-box
+
+a
+  cursor: pointer
+
+footer a:hover
+  color: $link
+
+.transform,
+.ng-fa-icon > svg
+  transition: all ease .2s
+  &:hover
+    transform: scale(1.2)

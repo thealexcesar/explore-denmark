@@ -2,15 +2,15 @@ import {ApplicationConfig, importProvidersFrom, provideZoneChangeDetection} from
 import {provideRouter} from '@angular/router';
 import {routes} from './app.routes';
 import {BrowserModule, provideClientHydration, withEventReplay} from "@angular/platform-browser";
-import {HttpClientModule, provideHttpClient, withFetch} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, provideHttpClient, withFetch} from "@angular/common/http";
 import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
 import {ToastrModule} from "ngx-toastr";
+import {CustomInterceptor} from "./core/interceptor/custom.interceptor";
 
 export const appConfig: ApplicationConfig = {
   providers: [
     importProvidersFrom(
       BrowserModule,
-      HttpClientModule,
       ToastrModule.forRoot({
         timeOut: 5000,
         positionClass: 'toast-top-right',
@@ -27,6 +27,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()),
-    provideZoneChangeDetection({ eventCoalescing: true }), provideAnimationsAsync()
+    provideZoneChangeDetection({ eventCoalescing: true }), provideAnimationsAsync(),
+    { provide: HTTP_INTERCEPTORS, useClass: CustomInterceptor, multi: true },
   ]
 };

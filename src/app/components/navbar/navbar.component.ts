@@ -48,7 +48,9 @@ export class NavbarComponent implements OnInit {
   }
 
   scrollToTop() {
-    this.scroll.scrollToTop();
+    setTimeout(() => {
+      this.scroll.scrollToTop();
+    }, 300);
   }
 
   scrollToSection(sectionId: string = ''): void {
@@ -64,6 +66,7 @@ export class NavbarComponent implements OnInit {
   private setInitialTheme(): void {
     this.updateTheme(this.theme.getCurrentTheme());
   }
+
 
   private updateTheme(theme: string = 'light'): void {
     const switchTo = 'Trocar tema para';

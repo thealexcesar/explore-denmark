@@ -5,6 +5,10 @@ import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, V
 import {NgIf} from "@angular/common";
 import {MaterialModules} from "../../shared/modules/material-modules";
 import {ToastrService} from "ngx-toastr";
+import {AuthResponse} from "@models/auth/auth-response";
+import {ServerAuthResponse} from "@models/auth/server-auth-status";
+import {RoleType} from "@models/enums/RoleType";
+import {UserForm} from "@models/user/user";
 
 @Component({
   selector: 'denmark-login',
@@ -21,7 +25,6 @@ import {ToastrService} from "ngx-toastr";
 export class LoginComponent {
   authForm: FormGroup;
   isSignUp: boolean = false;
-  private status: string = 'error'
 
   constructor(
     private fb: FormBuilder,
@@ -31,15 +34,13 @@ export class LoginComponent {
   ) {
     this.authForm = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      avatar: new FormControl('')
+      password: new FormControl('', [Validators.required, Validators.minLength(6)])
     });
   }
 
   onSubmit(): void {
     if (!this.authForm.valid) {
-      (this.toast as any)[this.status]('Por favor, preencha todos os campos requeridos corretamente.', 'Alerta');
+      this.toast.error('Por favor, preencha todos os campos requeridos corretamente.', 'Alerta');
       return;
     }
     this.isSignUp ? this.handleSignUp() : this.handleSignIn();
@@ -50,34 +51,38 @@ export class LoginComponent {
   }
 
   private handleSignUp(): void {
-    this.user.create(this.authForm.value).subscribe({
-      next: () => {
-        this.status = 'success';
-        // (this.toast as any)[this.status](this.status, 'created' | translate, this.status | translate); // TCC referencia -> fazer funcao generica.
-        (this.toast as any)[this.status](this.status, 'Usuário criado com sucesso.', "Sucesso");
-        this.router.navigate(['/login']).then(r => console.log('router:', r));
-      },
-      error: () => {
-        (this.toast as any)[this.status](this.status, 'Erro ao criar usuário', 'Erro');
-      }
+    const userData: UserForm = {
+      email: this.authForm.value.email,
+      password: this.authForm.value.password,
+      name: this.authForm.value.name,
+      avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRySwnnjP05zFpSJ4EDWK9hy9CTXUDDaPbqw&s',
+      role: RoleType.USER
+    };
+
+    this.user.create(userData).subscribe({
+      next: (response: ServerAuthResponse) => {
+        const { token } = response;
+        localStorage.setItem('authToken', token);
+        this.toast.success('Usuário criado com sucesso.', "Sucesso");
+        this.router.navigate(['/login']).then(r => console.log('Redirecionado para login:', r));
+      }, error: () => this.toast.error('Erro ao criar usuário', 'Erro')
     });
   }
 
   private handleSignIn(): void {
-    const loginData = {
-      email: this.authForm.value.email,
-      password: this.authForm.value.password
-    };
+    const { email, password } = this.authForm.value;
 
-    this.user.login(loginData).subscribe({
-      next: (response: any) => {
-        localStorage.setItem("token", response.access_token);
-        localStorage.setItem("role", response.access_role);
-        this.router.navigateByUrl('').then(r => console.log('redirect:', r));
-      },
-      error: () => {
-        (this.toast as any)[this.status](this.status, 'Usuário ou senha inválidos', 'Erro');
-      }
+    this.user.login({ email, password }).subscribe({
+      next: (response: ServerAuthResponse) => {
+        const authResponse: AuthResponse = {
+          access_token: response.token,
+          refresh_token: response.refreshToken || '',
+          user: response.user || null,
+        };
+        localStorage.setItem("token", authResponse.access_token);
+        localStorage.setItem("role", authResponse.user?.role || RoleType.USER);
+        this.router.navigateByUrl('').then(success => console.log('redirect', success ? 'success' : 'error'));
+      }, error: () => this.toast.error('Usuário ou senha inválidos.', 'Erro')
     });
   }
 }

@@ -26,7 +26,7 @@ export class CommonErrors {
     }
 
     console.error(errorMessage);
-    this.showErrorNotification(errorMessage); // Show notification to the user
+    this.showErrorNotification(errorMessage);
     return throwError(() => new Error(errorMessage));
   }
 

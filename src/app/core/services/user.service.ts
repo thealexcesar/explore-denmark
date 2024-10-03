@@ -1,7 +1,7 @@
 import {Injectable, Injector} from '@angular/core';
 import {catchError, Observable, tap, throwError} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {User, UserParams} from "@models/user/user";
+import {User, UserForm, UserParams} from "@models/user/user";
 import {environment} from "@environments/environment";
 import {ServerAuthResponse} from "@models/auth/server-auth-status";
 
@@ -21,14 +21,14 @@ export class UserService {
   }
 
   login(login: UserParams): Observable<ServerAuthResponse> {
-    return this.http.post<ServerAuthResponse>(`${this.url}/auth`, login).pipe(
+    return this.http.post<ServerAuthResponse>(`${this.url}/auth/login`, login).pipe(
       tap(response => this.handleAuthResponse(response, 'login')),
       catchError(this.handleError('login'))
     );
   }
 
-  create(user: UserParams): Observable<any> {
-    return this.http.post<any>(`${this.url}/users/is-available`, user).pipe(
+  create(user: UserForm): Observable<ServerAuthResponse> {
+    return this.http.post<ServerAuthResponse>(`${this.url}/users`, user).pipe(
       tap(response => this.handleAuthResponse(response, 'create')),
       catchError(this.handleError('create'))
     );
@@ -70,7 +70,7 @@ export class UserService {
     }
   }
 
-  private handleAuthResponse(response: ServerAuthResponse, action: 'login' | 'create'): void {
+  private handleAuthResponse(response: ServerAuthResponse, action: 'login' | 'create' | string): void {
     console.log(action === 'login' ? 'Usuário logado com sucesso:' : 'Usuário criado com sucesso:', response);
     localStorage.setItem('token', response.token);
     localStorage.setItem('currentUser', JSON.stringify(response.user));
