@@ -128,5 +128,18 @@
   .toast-error {
     @apply bg-red-500 text-white
   }
-
 }
+
+$font-sizes: (
+  h1: 2.5rem,
+  h2: 2rem,
+  h3: 1.75rem,
+  h4: 1.5rem
+);
+
+@each $element, $size in $font-sizes {
+  #{$element} {
+    font-size: $size;
+  }
+}
+
