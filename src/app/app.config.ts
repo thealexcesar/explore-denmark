@@ -6,11 +6,13 @@ import {HTTP_INTERCEPTORS, provideHttpClient, withFetch} from "@angular/common/h
 import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
 import {ToastrModule} from "ngx-toastr";
 import {CustomInterceptor} from "./core/interceptor/custom.interceptor";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 export const appConfig: ApplicationConfig = {
   providers: [
     importProvidersFrom(
       BrowserModule,
+      BrowserAnimationsModule,
       ToastrModule.forRoot({
         timeOut: 5000,
         positionClass: 'toast-top-right',

@@ -78,19 +78,20 @@
         <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Lembrar de mim</label>
       </div>
 
-      <button
-        type="submit"
-      >
-        {{ isSignUp ? 'Criar Conta' : 'Entrar' }}
-      </button>
-
-      <button
-        type="button"
-        (click)="toggleSign()"
-        class="mt-4 text-sm text-blue-600 hover:underline dark:text-blue-500"
-      >
-        {{ isSignUp ? 'Já possui uma conta? Entrar' : 'Não tem uma conta? Criar' }}
-      </button>
+      <div class="flex justify-between items-center">
+        <button
+          type="button"
+          (click)="toggleSign()"
+          class="text-sm text-blue-600 hover:underline dark:text-blue-500"
+        >
+          {{ isSignUp ? 'Já possui uma conta? Entrar' : 'Não tem uma conta? Criar' }}
+        </button>
+        <button
+         type="submit"
+       >
+         {{ isSignUp ? 'Criar Conta' : 'Entrar' }}
+       </button>
+     </div>
     </form>
   </div>
 </section>
