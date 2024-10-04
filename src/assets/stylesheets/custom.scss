@@ -131,14 +131,18 @@
 
   .card-article {
     @apply
-    shadow-md
+    shadow
     shadow-gray-500
+    hover:shadow-gray-600
+    dark:hover:shadow-gray-400
+    hover:shadow-md
     rounded-lg
     overflow-hidden
     cursor-pointer
     transition-transform
     transform
     hover:scale-105
+    w-full
   }
 }
 

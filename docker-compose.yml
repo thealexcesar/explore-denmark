@@ -10,3 +10,15 @@ services:
       - ./:/app
     environment:
       - STYLE=css
+    depends_on:
+      - json-server
+
+  json-server:
+    image: node:18
+    container_name: json-server
+    working_dir: /app
+    volumes:
+      - ./:/app
+    command: npx json-server --watch db.json --port 3000
+    ports:
+      - '3000:3000'
