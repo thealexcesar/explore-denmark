@@ -9,8 +9,8 @@ import {EconomyComponent} from "@pages/home/economy/economy.component";
 import {DemographyComponent} from "@pages/home/demography/demography.component";
 import {HistoryComponent} from "@pages/home/history/history.component";
 import {ArticlesComponent} from "@pages/articles/articles.component";
-import {NavbarComponent} from "@components/navbar/navbar.component";
-import {FooterComponent} from "@components/footer/footer.component";
+import {NavbarComponent} from "@ui/navbar/navbar.component";
+import {FooterComponent} from "@ui/footer/footer.component";
 
 @Component({
   selector: 'denmark-root',

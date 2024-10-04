@@ -4,6 +4,7 @@ import {Router, RouterLink} from "@angular/router";
 import {ThemeService} from "@services/theme.service";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {ScrollService} from "@services/scroll.service";
+import {MenuService} from "@services/menu.service";
 
 @Component({
   selector: 'denmark-navbar',
@@ -25,9 +26,10 @@ export class NavbarComponent implements OnInit {
   switchTheme!: string;
 
   constructor(
-    private theme: ThemeService,
+    public menu: MenuService,
     private router: Router,
     private scroll: ScrollService,
+    private theme: ThemeService
   ) {}
 
   ngOnInit(): void {
@@ -38,8 +40,19 @@ export class NavbarComponent implements OnInit {
     console.log('saiu');
   }
 
+
   toggleMenu(): void {
+    this.menu.toggleMenu();
     this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+
+    if (!target.closest('.navbar') && this.menu._isMenuOpen) {
+      this.menu.closeMenu();
+    }
   }
 
   @HostListener('window:scroll', [])

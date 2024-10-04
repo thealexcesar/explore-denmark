@@ -1,5 +1,5 @@
-<section class="p-10 min-h-screen flex items-center justify-center bg-slate-300 dark:bg-slate-800 rounded">
-  <div class="w-full max-w-sm mx-auto text-left lg:py-16 p-6">
+<div id="login" class="p-10 min-h-screen flex items-center justify-center bg-slate-300 dark:bg-slate-800 rounded">
+  <div class="content w-full max-w-sm mx-auto text-left lg:py-16 p-6">
     <form [formGroup]="authForm" (ngSubmit)="onSubmit()" class="w-full">
       <h2 class="text-2xl mb-5">{{ isSignUp ? 'Criar Conta' : 'Entrar' }}</h2>
 
@@ -75,7 +75,7 @@
             value=""
           />
         </div>
-        <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Lembrar de mim</label>
+        <label for="remember" class="ms-2 text-sm font-medium theme-light-title dark:text-gray-300">Lembrar de mim</label>
       </div>
 
       <div class="flex justify-between items-center">
@@ -87,11 +87,11 @@
           {{ isSignUp ? 'Já possui uma conta? Entrar' : 'Não tem uma conta? Criar' }}
         </button>
         <button
-         type="submit"
-       >
-         {{ isSignUp ? 'Criar Conta' : 'Entrar' }}
-       </button>
-     </div>
+          type="submit"
+        >
+          {{ isSignUp ? 'Criar Conta' : 'Entrar' }}
+        </button>
+      </div>
     </form>
   </div>
-</section>
+</div>
