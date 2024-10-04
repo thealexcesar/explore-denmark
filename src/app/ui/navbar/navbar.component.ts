@@ -40,7 +40,6 @@ export class NavbarComponent implements OnInit {
     console.log('saiu');
   }
 
-
   toggleMenu(): void {
     this.menu.toggleMenu();
     this.isMenuOpen = !this.isMenuOpen;
