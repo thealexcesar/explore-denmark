@@ -3,7 +3,7 @@ version: '3.5'
 services:
   angular-app:
     build: .
-    container_name: angular-app
+    container_name: angular
     ports:
       - '4200:4200'
     volumes:
