@@ -1,4 +1,4 @@
-import {User} from "@models/user/user";
+import {User} from "@models/users/user";
 
 export interface ServerAuthResponse {
   token: string;

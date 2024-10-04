@@ -1,52 +1,53 @@
 {
-  "categories": [
-    {
-      "id": 1,
-      "name": "Music",
-      "articleIds": [1, 2],
-      "sectionId": 1
-    },
-    {
-      "id": 2,
-      "name": "Art",
-      "articleIds": [3],
-      "sectionId": 1
-    }
-  ],
   "articles": [
     {
       "id": 1,
-      "title": "Danish Music",
-      "content": "A rich history of folk music in Denmark...",
-      "published": false,
-      "categoryId": 1
+      "title": "Explorando a Cultura Viking",
+      "content": "O povo Viking tinha uma cultura rica e diversificada...",
+      "createdBy": "Alex Cesar",
+      "createdAt": "2024-01-10T15:45:00",
+      "deleteConfirm": false,
+      "photoUrl": "https://denmark.dk/-/media/websites/denmarkdk/link-cards/what-to-wear-denmark.ashx?mw=500&hash=400550C00A99335078BB2128F89FA233"
     },
     {
       "id": 2,
-      "title": "Classical Composers",
-      "content": "Exploring the works of Danish composers...",
-      "published": true,
-      "categoryId": 1
+      "title": "História da Dinamarca",
+      "content": "A Dinamarca possui uma história milenar e sua mitologia nórdica. Um país rico em histórias intrigantes",
+      "createdBy": "Maria Silva",
+      "createdAt": "2024-01-05T09:30:00",
+      "deleteConfirm": false,
+      "photoUrl": "https://denmark.dk/-/media/websites/denmarkdk/link-cards/travelling-denmark-rubjerg.ashx?mw=500&hash=A79D360889D86B9BAC2181171E92B03E"
     },
     {
       "id": 3,
-      "title": "Danish Modern Art",
-      "content": "An overview of modern art in Denmark...",
-      "published": true,
-      "categoryId": 2
+      "title": "A arquitetura moderna de Copenhague",
+      "content": "A cidade de Copenhague é famosa por sua arquitetura...",
+      "createdBy": "Alex Cesar",
+      "createdAt": "2024-01-03T07:50:00",
+      "deleteConfirm": false,
+      "photoUrl": "https://denmark.dk/-/media/websites/denmarkdk/link-cards/activities-denmark.ashx?mw=500&hash=B010B31AFC582EF1C4515106E5CDF950"
     }
   ],
-  "sections": [
+  "comments": [
     {
       "id": 1,
-      "name": "Culture"
-    }
-  ],
-  "users": [
+      "blogId": 1,
+      "content": "Ótimo artigo sobre a cultura Viking!",
+      "createdBy": "Maria Silva",
+      "owner": "Mariazinha",
+      "ownerEmail": "maria.silva@example.com",
+      "createdAt": "2024-01-20T12:00:00",
+      "commentId": null
+    },
     {
-      "id": 1,
-      "email": "admin@gmail.com",
-      "password": "admin123"
+      "id": 2,
+      "blogId": 1,
+      "content": "Concordo! Muito interessante.",
+      "createdBy": "Alex Cesar",
+      "owner": "Alex Cesar",
+      "ownerEmail": "alex.cesar@example.com",
+      "createdAt": "2024-01-21T08:30:00",
+      "commentId": 1
     }
   ]
 }

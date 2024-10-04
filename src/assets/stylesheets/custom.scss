@@ -128,6 +128,18 @@
   .toast-error {
     @apply bg-red-500 text-white
   }
+
+  .card-article {
+    @apply
+    shadow-md
+    shadow-gray-500
+    rounded-lg
+    overflow-hidden
+    cursor-pointer
+    transition-transform
+    transform
+    hover:scale-105
+  }
 }
 
 $font-sizes: (
@@ -142,4 +154,5 @@ $font-sizes: (
     font-size: $size;
   }
 }
+
 

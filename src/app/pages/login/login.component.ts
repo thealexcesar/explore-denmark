@@ -8,7 +8,7 @@ import {ToastrService} from "ngx-toastr";
 import {AuthResponse} from "@models/auth/auth-response";
 import {ServerAuthResponse} from "@models/auth/server-auth-status";
 import {RoleType} from "@models/enums/RoleType";
-import {UserForm} from "@models/user/user";
+import {UserForm} from "@models/users/user";
 
 @Component({
   selector: 'denmark-login',
