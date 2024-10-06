@@ -4,12 +4,12 @@ import {Router} from "@angular/router";
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {SharedImports} from "../../shared/imports/SharedImports";
-import {ServerAuthResponse} from "@models/auth/server-auth-status";
 import {RoleType} from "@models/enums/RoleType";
 import {UserForm} from "@models/users/user";
 import {StatusType} from "@models/enums/statusType";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {SnackbarService} from "@services/SnackbarService";
+import {ServerAuthResponse} from "@models/auth/server-auth-response";
 
 @Component({
   selector: 'denmark-login',
@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.authForm.value;
     this.user.login({ email, password }).subscribe({
       next: (response: ServerAuthResponse) => {
-        localStorage.setItem('token', response.token);
+        localStorage.setItem('access_token', response.token);
         localStorage.setItem('role', response.user?.role || RoleType.USER);
         this.router.navigateByUrl('').then(success => console.log('redirect', success ? 'success' : 'error'));
       },

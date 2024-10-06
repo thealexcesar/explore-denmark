@@ -5,6 +5,8 @@ import {ThemeService} from "@services/theme.service";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {ScrollService} from "@services/scroll.service";
 import {MenuService} from "@services/menu.service";
+import {User} from "@models/users/user";
+import {UserService} from "@services/user.service";
 
 @Component({
   selector: 'denmark-navbar',
@@ -24,16 +26,27 @@ export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
   showBorder: boolean = false;
   switchTheme!: string;
+  currentUser: User | null = null;
 
   constructor(
     public menu: MenuService,
     private router: Router,
+    private user: UserService,
     private scroll: ScrollService,
     private theme: ThemeService
   ) {}
 
   ngOnInit(): void {
     this.setInitialTheme();
+    this.currentUser = this.user.getCurrentUser();
+    this.isLoggedIn = !! this.currentUser;
+    console.log('TESTE\n\n\n');
+    console.log(this.isLoggedIn);
+    console.log(this.currentUser?.email)
+    console.log(this.currentUser?.id)
+    console.log(this.currentUser?.name)
+    console.log(this.currentUser)
+    console.log('TESTE\n\n\n');
   }
 
   logout(): void {
