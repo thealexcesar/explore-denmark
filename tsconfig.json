@@ -29,6 +29,7 @@
       "@images/*": ["assets/images/*"],
       "@components/*": ["app/components/*"],
       "@environments/*": ["environments/*"],
+      "@interfaces/*": ["app/core/interfaces/*"],
       "@pages/*": ["app/pages/*"],
       "@login/*": ["app/pages/login/*"],
       "@models/*": ["app/core/models/*"],

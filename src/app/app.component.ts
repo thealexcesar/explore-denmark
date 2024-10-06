@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import {FaIconLibrary} from "@fortawesome/angular-fontawesome";
 import {fas} from "@fortawesome/free-solid-svg-icons";
 import {CommonModule} from "@angular/common";
-import {MaterialModules} from "./shared/modules/material-modules";
+import {SharedImports} from "./shared/imports/SharedImports";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {EconomyComponent} from "@pages/home/economy/economy.component";
 import {DemographyComponent} from "@pages/home/demography/demography.component";
@@ -22,7 +22,7 @@ import {FooterComponent} from "@ui/footer/footer.component";
     HistoryComponent,
     NavbarComponent,
 
-    MaterialModules,
+    SharedImports,
     CommonModule,
     MatSnackBarModule,
 

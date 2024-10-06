@@ -17,34 +17,19 @@ import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
+import {ErrorService} from "@services/error.service";
+import {SharedImports} from "../../shared/imports/SharedImports";
 
 @Component({
   selector: 'denmark-articles',
   standalone: true,
   imports: [
-
     RouterOutlet,
     DatePipe,
     NgIf,
     NgForOf,
     FormsModule,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MatTable,
-    MatColumnDef,
-    MatHeaderCell,
-    MatCell,
-    MatCellDef,
-    MatIconButton,
-    RouterLink,
-    MatIcon,
-    MatHeaderRow,
-    MatRow,
-    MatRowDef,
-    MatHeaderRowDef,
-    MatHeaderCellDef,
-    MatButton
+    SharedImports
   ],
   templateUrl: './articles.component.html',
   styles: ``
@@ -56,7 +41,7 @@ export class ArticlesComponent {
   filterTitle: string = '';
   filterAuthor: string = '';
 
-  constructor(private articleService: ArticleService, private router: Router) {}
+  constructor(private articleService: ArticleService, private router: Router, private error: ErrorService) {}
 
   ngOnInit(): void {
     this.getAll();
@@ -67,10 +52,16 @@ export class ArticlesComponent {
       title: this.filterTitle,
       author: this.filterAuthor,
     };
-    this.articleService.findAll(filters).subscribe(articles => {
-      this.dataSource.data = articles;
-      console.log('Artigos:', articles);
-    });
+
+    this.articleService.findAll(filters).subscribe(
+      articles => {
+        this.dataSource.data = articles;
+        console.log('Artigos:', articles);
+      },
+      error => {
+        this.error.handleError(error);
+      }
+    );
   }
 
   getArticleImage(photoUrl: string | undefined): string {
