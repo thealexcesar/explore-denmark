@@ -11,6 +11,7 @@ import {HistoryComponent} from "@pages/home/history/history.component";
 import {ArticlesComponent} from "@pages/articles/articles.component";
 import {NavbarComponent} from "@ui/navbar/navbar.component";
 import {FooterComponent} from "@ui/footer/footer.component";
+import {ShowArticleComponent} from "@pages/articles/show-article/show-article.component";
 
 @Component({
   selector: 'denmark-root',
@@ -21,6 +22,7 @@ import {FooterComponent} from "@ui/footer/footer.component";
     EconomyComponent,
     HistoryComponent,
     NavbarComponent,
+    ShowArticleComponent,
 
     SharedImports,
     CommonModule,

@@ -9,6 +9,7 @@ import {
 } from "@angular/material/table";
 import {SharedImports} from "../../shared/imports/SharedImports";
 import {ErrorService} from "@services/errors/error.service";
+import {ShowArticleComponent} from "@pages/articles/show-article/show-article.component";
 
 @Component({
   selector: 'denmark-articles',
@@ -19,7 +20,8 @@ import {ErrorService} from "@services/errors/error.service";
     NgIf,
     NgForOf,
     FormsModule,
-    SharedImports
+    SharedImports,
+    ShowArticleComponent
   ],
   templateUrl: './articles.component.html',
   styles: ``

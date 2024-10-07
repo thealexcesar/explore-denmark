@@ -1,1 +1,25 @@
-<p>show-article works!</p>
+<div *ngIf="loading">Carregando...</div>
+<div *ngIf="msg">{{ msg }}</div>
+<div *ngIf="article">
+  <div class="mb-0 mt-20 md:mt-0 rounded-lg shadow-lg">
+    <div class="mx-auto max-w-screen-xl text-left lg:py-16 p-8">
+      <div class="article-container">
+        <div class="flex justify-center">
+          <img *ngIf="article.photoUrl" class="w-full h-auto rounded-md mb-4" [src]="article.photoUrl" alt="Imagem do artigo">
+        </div>
+        <h1 class="article-title text-3xl font-bold text-denmark-primary-dark">{{ article.title }}</h1>
+        <div class="article-body mt-4">
+          <p class="text-base text-gray-700">{{ article.content }}</p>
+        </div>
+        <div class="py-4">
+          <p class="text-base text-gray-600">Criado por: <span class="font-semibold">{{ article.createdBy }}</span></p>
+          <p class="text-base text-gray-600">
+            Categoria: <span class="font-semibold">{{ getCategoryValue(article.category) }}</span>
+          </p>
+
+          <p class="text-base text-gray-600">Criado em: <span class="font-semibold">{{ article.createdAt | date:'medium' }}</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

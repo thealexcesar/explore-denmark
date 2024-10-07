@@ -12,6 +12,7 @@ import {ArticleDetailComponent} from "@pages/admin/articles/pages/article-detail
 import {UserFormComponent} from "@pages/admin/users/pages/user-form/user-form.component";
 import {UserDetailComponent} from "@pages/admin/users/pages/user-detail/user-detail.component";
 import {FormComponent} from "@pages/form/form.component";
+import {ShowArticleComponent} from "@pages/articles/show-article/show-article.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -22,17 +23,8 @@ export const routes: Routes = [
   {path: 'history', component: HistoryComponent},
   {path: 'articles', component: ArticlesComponent},
   {path: 'form', component: FormComponent},
-
-  {
-    path: 'admin/articles',
-    children: [
-      { path: '', component: ArticleListComponent },
-      { path: 'new', component: ArticleFormComponent },
-      { path: 'edit/:id', component: ArticleFormComponent },
-      { path: ':id', component: ArticleDetailComponent },
-    ],
-  },
-  {
+  { path: 'article/:id', component: ShowArticleComponent },
+  /*{
     path: 'admin/users',
     children: [
       { path: '', component: UserListComponent },
@@ -40,5 +32,5 @@ export const routes: Routes = [
       { path: 'edit/:id', component: UserFormComponent },
       { path: ':id', component: UserDetailComponent },
     ],
-  },
+  },*/
 ];

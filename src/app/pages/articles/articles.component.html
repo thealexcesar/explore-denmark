@@ -15,7 +15,7 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-4">
           <div *ngFor="let article of dataSource.data" class="card-article">
-            <div class="w-full h-60 rounded">
+            <div class="w-full h-60 rounded" [routerLink]="['/article', article.id]" >
               <img [src]="getArticleImage(article.photoUrl)" alt="{{ article.title }}" class="object-contain w-full h-full rounded" />
             </div>
             <div class="p-4 h-56">
