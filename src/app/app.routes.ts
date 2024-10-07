@@ -1,6 +1,5 @@
 import {Routes} from '@angular/router';
 import {HomeComponent} from "@pages/home/home.component";
-import {LoginComponent} from "@login/login.component";
 import {DemographyComponent} from "@pages/home/demography/demography.component";
 import {HistoryComponent} from "@pages/home/history/history.component";
 import {EconomyComponent} from "@pages/home/economy/economy.component";
@@ -12,6 +11,7 @@ import {ArticleFormComponent} from "@pages/admin/articles/pages/article-form/art
 import {ArticleDetailComponent} from "@pages/admin/articles/pages/article-detail/article-detail.component";
 import {UserFormComponent} from "@pages/admin/users/pages/user-form/user-form.component";
 import {UserDetailComponent} from "@pages/admin/users/pages/user-detail/user-detail.component";
+import {FormComponent} from "@pages/form/form.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -21,7 +21,7 @@ export const routes: Routes = [
   {path: 'geography', component: GeographyComponent},
   {path: 'history', component: HistoryComponent},
   {path: 'articles', component: ArticlesComponent},
-  {path: 'login', component: LoginComponent},
+  {path: 'form', component: FormComponent},
 
   {
     path: 'admin/articles',

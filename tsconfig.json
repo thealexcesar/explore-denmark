@@ -31,7 +31,7 @@
       "@environments/*": ["environments/*"],
       "@interfaces/*": ["app/core/interfaces/*"],
       "@pages/*": ["app/pages/*"],
-      "@login/*": ["app/pages/login/*"],
+      "@form/*": ["app/pages/form/*"],
       "@models/*": ["app/core/models/*"],
       "@services/*": ["app/core/services/*"],
       "@style/*": ["assets/stylesheets/*"],

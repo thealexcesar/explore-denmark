@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {environment} from "@environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {ErrorService} from "@services/error.service";
+import {ErrorService} from "@services/errors/error.service";
 import {catchError, Observable} from "rxjs";
 
 @Injectable({

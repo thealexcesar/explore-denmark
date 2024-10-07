@@ -7,6 +7,8 @@ import {ScrollService} from "@services/scroll.service";
 import {MenuService} from "@services/menu.service";
 import {User} from "@models/users/user";
 import {UserService} from "@services/user.service";
+import {AuthService} from "@services/auth.service";
+import {UserStateService} from "@services/user-state.service";
 
 @Component({
   selector: 'denmark-navbar',
@@ -29,28 +31,26 @@ export class NavbarComponent implements OnInit {
   currentUser: User | null = null;
 
   constructor(
+    public auth: AuthService,
     public menu: MenuService,
     private router: Router,
-    private user: UserService,
     private scroll: ScrollService,
-    private theme: ThemeService
+    private theme: ThemeService,
+    private userState: UserStateService
   ) {}
 
   ngOnInit(): void {
     this.setInitialTheme();
-    this.currentUser = this.user.getCurrentUser();
-    this.isLoggedIn = !! this.currentUser;
-    console.log('TESTE\n\n\n');
-    console.log(this.isLoggedIn);
-    console.log(this.currentUser?.email)
-    console.log(this.currentUser?.id)
-    console.log(this.currentUser?.name)
-    console.log(this.currentUser)
-    console.log('TESTE\n\n\n');
+
+    this.userState.currentUser.subscribe(user => {
+      this.currentUser = user;
+      this.isLoggedIn = !!user;
+    });
   }
 
   logout(): void {
-    console.log('saiu');
+    this.auth.logout();
+    this.router.navigate(['']).then(r => console.log(r));
   }
 
   toggleMenu(): void {
@@ -73,9 +73,7 @@ export class NavbarComponent implements OnInit {
   }
 
   scrollToTop() {
-    setTimeout(() => {
-      this.scroll.scrollToTop();
-    }, 300);
+    setTimeout(() => this.scroll.scrollToTop(), 300);
   }
 
   scrollToSection(sectionId: string = ''): void {
@@ -91,7 +89,6 @@ export class NavbarComponent implements OnInit {
   private setInitialTheme(): void {
     this.updateTheme(this.theme.getCurrentTheme());
   }
-
 
   private updateTheme(theme: string = 'light'): void {
     const switchTo = 'Trocar tema para';

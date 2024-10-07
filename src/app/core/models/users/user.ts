@@ -7,8 +7,8 @@ export interface UserParams {
 }
 
 export interface UserForm extends UserParams {
-  avatar: string;
-  role: RoleType;
+  avatar?: string;
+  role: RoleType | string;
 }
 
 export interface User extends UserParams, UserForm {

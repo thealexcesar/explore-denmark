@@ -47,18 +47,21 @@
         />
       </button>
 
-      <button *ngIf="isLoggedIn" type="button" (click)="logout()">Logout</button>
+      <button *ngIf="isLoggedIn" type="button" (click)="logout()" class="flex items-center justify-between gap-2">
+        <img src="{{ currentUser?.avatar }}" alt="Avatar" class="rounded-full">
+        <span>Sair</span>
+      </button>
       <button
         type="button"
         *ngIf="!isLoggedIn"
-        [routerLink]="['/login']"
+        [routerLink]="['/form']"
         class="font-semibold"
       >
         Login
       </button>
     </div>
 
-      <div *ngIf="isMenuOpen" [ngClass]="{'block': isMenuOpen, 'hidden': !isMenuOpen}" class="w-full md:block md:w-auto" id="navbar-default">
+      <div *ngIf="isMenuOpen" [ngClass]="{'block': isMenuOpen, 'hidden': !isMenuOpen}" class="w-full md:block md:w-auto" id="">
           <ul class="links">
               <li><a (click)="scrollToSection('demography')" tabindex="0">Demografia</a></li>
               <li><a (click)="scrollToSection('history')" tabindex="0">História</a></li>
