@@ -10,6 +10,7 @@ import {
 import {SharedImports} from "../../shared/imports/SharedImports";
 import {ErrorService} from "@services/errors/error.service";
 import {ShowArticleComponent} from "@pages/articles/show-article/show-article.component";
+import {UserStateService} from "@services/user-state.service";
 
 @Component({
   selector: 'denmark-articles',
@@ -33,10 +34,19 @@ export class ArticlesComponent {
   filterTitle: string = '';
   filterAuthor: string = '';
 
-  constructor(private articleService: ArticleService, private router: Router, private error: ErrorService) {}
+  constructor(
+    private articleService: ArticleService,
+    private router: Router,
+    private error: ErrorService,
+    private userState: UserStateService
+  ) {}
 
   ngOnInit(): void {
     this.getAll();
+  }
+
+  isAdmin(): boolean {
+    return this.userState.isAdmin();
   }
 
   getAll(): void {
@@ -66,12 +76,6 @@ export class ArticlesComponent {
   }
 
   // deleteArticle(id: number | string) {
-  //   if (confirm('Você tem certeza de que deseja excluir este artigo?')) {
-  //     this.articleService.delete(id).subscribe({
-  //       next: () => this.loadArticles(),
-  //       error: (e) => console.error('Erro:', e),
-  //     });
-  //   }
   // }
 
 

@@ -21,11 +21,13 @@
         (click)="scrollToTop()" [routerLink]="['']"
         class="flex items-center space-x-1 rtl:space-x-reverse px-2 rounded"
       >
-        <img src="assets/images/viking.png" alt="Viking Logo" title="Início"/>
+        <img src="assets/images/viking.png" alt="Viking Logo" title="Início" class="h-8"/>
+<!--        <span class="text-gray-900">{{isAdmin()}}</span>--> <!--FIXME: remove-->
       </a>
     </div>
 
-    <div *ngIf="!isMenuOpen" [ngClass]="{'block': isMenuOpen, 'hidden': !isMenuOpen}" class="w-full md:block md:w-auto" id="navbar-default">
+    <div *ngIf="!isMenuOpen" [ngClass]="{'block': isMenuOpen, 'hidden': !isMenuOpen}" class="w-full md:block md:w-auto"
+         id="navbar-default">
       <ul class="links">
         <li><a (click)="scrollToSection('demography')" tabindex="0">Demografia</a></li>
         <li><a (click)="scrollToSection('history')" tabindex="0">História</a></li>
@@ -48,7 +50,7 @@
       </button>
 
       <div *ngIf="isLoggedIn" class="flex items-center justify-between gap-2">
-        <img src="{{ currentUser?.avatar }}" alt="Avatar" class="rounded-full">
+        <img src="{{ currentUser?.avatar }}" alt="Avatar" class="rounded-full h-8">
         <button type="button" (click)="openConfirmDialog()">Sair</button>
       </div>
 
@@ -62,13 +64,14 @@
       </button>
     </div>
 
-      <div *ngIf="isMenuOpen" [ngClass]="{'block': isMenuOpen, 'hidden': !isMenuOpen}" class="w-full md:block md:w-auto" id="">
-          <ul class="links">
-              <li><a (click)="scrollToSection('demography')" tabindex="0">Demografia</a></li>
-              <li><a (click)="scrollToSection('history')" tabindex="0">História</a></li>
-              <li><a (click)="scrollToSection('economy')" tabindex="0">Economia</a></li>
-              <li><a [routerLink]="['/articles']">Artigos</a></li>
-          </ul>
-      </div>
+    <div *ngIf="isMenuOpen" [ngClass]="{'block': isMenuOpen, 'hidden': !isMenuOpen}" class="w-full md:block md:w-auto"
+         id="">
+      <ul class="links">
+        <li><a (click)="scrollToSection('demography')" tabindex="0">Demografia</a></li>
+        <li><a (click)="scrollToSection('history')" tabindex="0">História</a></li>
+        <li><a (click)="scrollToSection('economy')" tabindex="0">Economia</a></li>
+        <li><a [routerLink]="['/articles']">Artigos</a></li>
+      </ul>
+    </div>
   </div>
 </nav>

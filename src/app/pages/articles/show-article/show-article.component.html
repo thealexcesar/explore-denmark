@@ -7,7 +7,7 @@
         <div class="flex justify-center">
           <img *ngIf="article.photoUrl" class="w-full h-auto rounded-md mb-4" [src]="article.photoUrl" alt="Imagem do artigo">
         </div>
-        <h1 class="article-title text-3xl font-bold text-denmark-primary-dark">{{ article.title }}</h1>
+        <h1 class="article-title text-3xl font-bold text-denmark-red dark:text-denmark-red">{{ article.title }}</h1>
         <div class="article-body mt-4">
           <p class="text-base text-gray-700">{{ article.content }}</p>
         </div>

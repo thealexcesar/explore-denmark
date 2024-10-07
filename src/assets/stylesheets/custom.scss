@@ -20,9 +20,8 @@
   section, #login {
     @apply max-w-screen-xl mx-auto px-4 py-6;
   }
-
   img {
-    @apply h-8 transform bg-transparent hover:bg-transparent active:bg-transparent;
+    @apply transform hover:bg-transparent active:bg-transparent;
   }
 
   button[type='submit'] {

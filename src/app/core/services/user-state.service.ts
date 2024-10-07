@@ -25,4 +25,9 @@ export class UserStateService {
   getCurrentUser(): User | null {
     return this.currentUserSubject.value;
   }
+
+  isAdmin(): boolean {
+    const user = this.getCurrentUser();
+    return user?.role === 'admin';
+  }
 }
