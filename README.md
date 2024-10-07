@@ -2,6 +2,43 @@
 
 Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 18.2.5.
 
+## usuários Para Testes
+
+```json
+[
+    "id": 3,
+    "email": "admin@mail.com",
+    "password": "admin123",
+    "name": "Admin",
+    "role": "admin",
+    "avatar": "https://i.imgur.com/yhW6Yw1.jpg",
+    "creationAt": "2024-10-07T20:00:21.000Z",
+    "updatedAt": "2024-10-07T20:00:21.000Z"
+  },
+  {
+    "id": 4,
+    "email": "kennedy@gmail.com",
+    "password": "changeme",
+    "name": "User",
+    "role": "customer",
+    "avatar": "https://picsum.photos/800",
+    "creationAt": "2024-10-07T20:10:05.000Z",
+    "updatedAt": "2024-10-07T20:10:05.000Z"
+  },
+  {
+    "id": 5,
+    "email": "kennedy@gmail.com",
+    "password": "changeme",
+    "name": "User",
+    "role": "customer",
+    "avatar": "https://picsum.photos/800",
+    "creationAt": "2024-10-07T20:11:30.000Z",
+    "updatedAt": "2024-10-07T20:11:30.000Z"
+  }
+]
+
+```
+
 ## Pré-requisitos
 
 Certifique-se de que você possui as seguintes ferramentas instaladas em seu sistema:
