@@ -6,9 +6,10 @@ import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {ScrollService} from "@services/scroll.service";
 import {MenuService} from "@services/menu.service";
 import {User} from "@models/users/user";
-import {UserService} from "@services/user.service";
 import {AuthService} from "@services/auth.service";
 import {UserStateService} from "@services/user-state.service";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmDialogComponent} from "@ui/confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: 'denmark-navbar',
@@ -17,7 +18,7 @@ import {UserStateService} from "@services/user-state.service";
     NgClass,
     RouterLink,
     FaIconComponent,
-
+    ConfirmDialogComponent,
     NgIf
   ],
   templateUrl: './navbar.component.html'
@@ -33,6 +34,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     public auth: AuthService,
     public menu: MenuService,
+    public dialog: MatDialog,
     private router: Router,
     private scroll: ScrollService,
     private theme: ThemeService,
@@ -48,14 +50,25 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  logout(): void {
-    this.auth.logout();
-    this.router.navigate(['']).then(r => console.log(r));
-  }
-
   toggleMenu(): void {
     this.menu.toggleMenu();
     this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  openConfirmDialog(): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Logout',
+        message: 'Tem certeza de que deseja sair?'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.auth.logout();
+        this.router.navigateByUrl('').then(r => console.log('Redirect:', r));
+      }
+    });
   }
 
   @HostListener('document:click', ['$event'])

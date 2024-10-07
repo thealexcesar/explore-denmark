@@ -47,10 +47,11 @@
         />
       </button>
 
-      <button *ngIf="isLoggedIn" type="button" (click)="logout()" class="flex items-center justify-between gap-2">
+      <div *ngIf="isLoggedIn" class="flex items-center justify-between gap-2">
         <img src="{{ currentUser?.avatar }}" alt="Avatar" class="rounded-full">
-        <span>Sair</span>
-      </button>
+        <button type="button" (click)="openConfirmDialog()">Sair</button>
+      </div>
+
       <button
         type="button"
         *ngIf="!isLoggedIn"

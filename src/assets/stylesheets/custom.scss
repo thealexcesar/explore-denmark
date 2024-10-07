@@ -46,6 +46,15 @@
     md:dark:bg-gray-900 dark:border-gray-700;
   }
 
+  .btn-danger {
+    @apply inline-flex w-full justify-center rounded-md bg-red-700 px-3 py-2 text-white
+    shadow-sm transition-colors duration-300 hover:bg-red-600 sm:ml-3 sm:w-auto;
+  }
+
+  .btn-secondary {
+    @apply mt-3 inline-flex w-full justify-center rounded-md bg-gray-800 px-3 py-2 text-white
+    shadow-sm transition-colors duration-300 hover:bg-gray-700 sm:mt-0 sm:w-auto;
+  }
 
   .card-article {
     @apply shadow shadow-gray-500 hover:shadow-gray-600 dark:hover:shadow-gray-400 hover:shadow-md
@@ -61,3 +70,4 @@ $font-sizes: (h1: 2.5rem, h2: 2rem, h3: 1.75rem, h4: 1.5rem);
     letter-spacing: 0.05em;
   }
 }
+
