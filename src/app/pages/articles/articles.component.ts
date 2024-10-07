@@ -72,12 +72,12 @@ export class ArticlesComponent {
 
 
   redirectToNewArticle(): void {
-    this.router.navigate(['/']).then(r => r); // TODO path correto
+    this.router.navigate(['/']).then(r => r); // TODO: path correto
   }
 
-  // deleteArticle(id: number | string) {
-  // }
-
+  deleteArticle(id: number | string) {
+   // TODO!
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
